@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package protocol;
+option go_package = "./protocol";
+
+message SignInRequest {
+    string login = 1;
+    string password = 2;
+}
+
+message SignInResponse {
+    string token = 1;
+    string refreshToken = 2;
+}
+
+message SignUpRequest {
+    string login = 1;
+    string email = 2;
+    string password = 3;
+}
+
+message DeleteRequest {
+    string login = 1;
+}
+
+message AddClaimsRequest {
+    string login = 1;
+    map<string, string > claims = 2;
+}
+
+message RefreshTokenRequest {
+    string token = 1;
+    string tokenRefresh = 2;
+}
+
+message RefreshTokenResponse {
+    string token = 1;
+    string refreshToken = 2;
+}
+
+message ConfirmRequest {
+    string login = 1;
+    string uuidConfirm = 2;
+}
+
+message RestoreRequest {
+    string token = 1;
+    string login = 2;
+    string newPassword = 3;
+}
+
+message EmptyResponse {
+}
+
+message DeleteClaimsRequest {
+    string login = 1;
+    map<string, string> claims = 2;
+}
+
+message ChangePasswordRequest {
+    string email = 1;
+    string oldPassword = 2;
+    string newPassword = 3;
+}
+
+message ForgotPasswordRequest {
+    string login = 1;
+}
+
+service AuthService {
+    rpc SignIn (SignInRequest) returns (SignInResponse);
+    rpc SignUp (SignUpRequest) returns (EmptyResponse);
+    rpc DeleteClaims (DeleteClaimsRequest) returns (EmptyResponse);
+    rpc Delete (DeleteRequest) returns (EmptyResponse);
+    rpc AddClaims (AddClaimsRequest) returns (EmptyResponse);
+    rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
+    rpc Confirm (ConfirmRequest) returns (EmptyResponse);
+    rpc Restore (RestoreRequest) returns (EmptyResponse);
+    rpc ForgotPassword (ForgotPasswordRequest) returns (EmptyResponse);
+    rpc ChangePassword (ChangePasswordRequest) returns (EmptyResponse);
+}
+

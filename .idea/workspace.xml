@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2d8ca363-7409-475c-b161-a48aa0a98273" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/authUsecases.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/auth/token.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/email/smtp.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/email/structs.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/claimsRepository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/confirmationRepository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/refreshRepository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/repository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/restoreRepository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/userRepositiry.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/server/addClaims_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/server/confirm_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/server/deleteClaims_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/server/deleteUser_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/server/forgot_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/server/refreshToken_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/server/restore_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/server/server.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/server/signIn_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/server/signUp_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/service/confirmUsecases.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/service/refreshTokenUsecases.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/service/restorePasswordUsecases.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/service/signInUsecases.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/service/signUpUsecases.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/service/user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/V1__initial.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/V2__tableRefresh.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/V3__confirmation.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/V4__restorePassword.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/protocol/auth.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="/usr/lib/go-1.15" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="ProjectId" id="1iAyCfHfZJ2MsdDBhnf7LSLIqaL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../config" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="go.vgo" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/server" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/internal" />
+      <recent name="$PROJECT_DIR$/migrations" />
+      <recent name="$PROJECT_DIR$/internal/repository" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="grpc-auth-server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
+      <module name="grpc-auth-server" />
+      <working_directory value="$PROJECT_DIR$" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="true" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+          <ENTRY IS_ENABLED="true" PARSER="env" PATH=".env" />
+        </ENTRIES>
+      </EXTENSION>
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <package value="github.com/leshachaplin/grpc-auth-server" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.grpc-auth-server" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="565" y="207" width="833" height="758" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601468733578">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="565" y="207" width="833" height="758" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1601468733578" />
+    <state x="847" y="426" width="309" height="268" key="EnvironmentVariablesDialog" timestamp="1601466412529">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="847" y="426" width="309" height="268" key="EnvironmentVariablesDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1601466412529" />
+    <state x="754" y="340" width="424" height="491" key="FileChooserDialogImpl" timestamp="1601468002537">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="754" y="340" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1601468002537" />
+    <state width="1874" height="340" key="GridCell.Tab.0.bottom" timestamp="1601468905739">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601468905739" />
+    <state width="1874" height="340" key="GridCell.Tab.0.center" timestamp="1601468905738">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601468905738" />
+    <state width="1874" height="340" key="GridCell.Tab.0.left" timestamp="1601468905738">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601468905738" />
+    <state width="1874" height="340" key="GridCell.Tab.0.right" timestamp="1601468905739">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601468905739" />
+    <state width="1874" height="340" key="GridCell.Tab.1.bottom" timestamp="1601468905737">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.1.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601468905737" />
+    <state width="1874" height="340" key="GridCell.Tab.1.center" timestamp="1601468905735">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.1.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601468905735" />
+    <state width="1874" height="340" key="GridCell.Tab.1.left" timestamp="1601468905734">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.1.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601468905734" />
+    <state width="1874" height="340" key="GridCell.Tab.1.right" timestamp="1601468905736">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601468905736" />
+    <state x="449" y="188" width="1022" height="737" key="SettingsEditor" timestamp="1601466202886">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="449" y="188" width="1022" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1601466202886" />
+    <state x="811" y="36" width="287" height="1041" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1601388726925">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="811" y="36" width="287" height="1041" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1601388726925" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main.go</url>
+          <line>24</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
