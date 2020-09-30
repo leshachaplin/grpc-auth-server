@@ -19,7 +19,7 @@ func TestConfirm(t *testing.T) {
 	client := protocol.NewAuthServiceClient(clientConnInterface)
 
 	login := fmt.Sprintf("les")
-	uuid := fmt.Sprintf("a16e276e-3421-4d8a-9db7-cf1a3096f291")
+	uuid := fmt.Sprintf("8520e916-f8d4-4341-a3de-8585d42c8c50")
 
 	requestConfirm := &protocol.ConfirmRequest{
 		Login:    login,

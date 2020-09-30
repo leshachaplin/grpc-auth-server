@@ -110,7 +110,7 @@ func (s *Server) ChangePassword(ctx context.Context, req *protocol.ChangePasswor
 }
 
 func (s *Server) ForgotPassword(ctx context.Context, req *protocol.ForgotPasswordRequest) (*protocol.EmptyResponse, error) {
-	err := s.Rpc.ForgotPassword(ctx, req.Login)
+	err := s.Rpc.ForgotPassword(ctx, req.Login, req.Email)
 	if err != nil {
 		log.Errorf("error in forgot password method: %s", err)
 		return nil, err

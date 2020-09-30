@@ -19,8 +19,8 @@ func TestRestore(t *testing.T) {
 	client := protocol.NewAuthServiceClient(clientConnInterface)
 
 	login := fmt.Sprintf("les")
-	newPassword := fmt.Sprintf("penisPalladin")
-	uuid := fmt.Sprintf("c4685855-f8c3-410c-879a-772901ace9f9")
+	newPassword := fmt.Sprintf("jopa")
+	uuid := fmt.Sprintf("b57d6d81-b85e-4e4a-9459-7d12bfb3f8fe")
 
 	requestRestore := &protocol.RestoreRequest{
 		Token:       uuid,

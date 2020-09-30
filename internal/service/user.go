@@ -23,6 +23,7 @@ type UserService struct {
 	emailSend email.EmailSender
 }
 
+//TODO: Restore - delete after usage
 func New(usersRepository repository.UsersRepository, claims repository.RepositoryOfClaims,
 	configAws config.ConfigAws, config conf.Config, tokenRepository repository.RefreshTokenRepository,
 	restoreR repository.RestoreRepository, confirmR repository.ConfirmationRepository,
@@ -71,7 +72,7 @@ func (s *UserService) SignUp(ctx context.Context, mail string, username string, 
 		return err
 	}
 
-	err = checkIsConfirmEmailSend(ctx, user.Username, s.confirm, s.emailSend)
+	err = checkIsConfirmEmailSend(ctx, username, mail, s.confirm, s.emailSend)
 	if err != nil {
 		return err
 	}
@@ -79,14 +80,14 @@ func (s *UserService) SignUp(ctx context.Context, mail string, username string, 
 	return err
 }
 
-func (s *UserService) ResendEmail(ctx context.Context, login string) error {
+func (s *UserService) ResendEmail(ctx context.Context, login, mail string) error {
 	err := s.confirm.Delete(ctx, login)
 	if err != nil {
 		log.Errorf("error in delete uuid confirmation", err)
 		return err
 	}
 
-	err = checkIsConfirmEmailSend(ctx, login, s.confirm, s.emailSend)
+	err = checkIsConfirmEmailSend(ctx, login, mail, s.confirm, s.emailSend)
 
 	return err
 }
@@ -98,7 +99,7 @@ func (s *UserService) ConfirmEmail(ctx context.Context, uuidConf, login string) 
 		return err
 	}
 
-	err = confirmUserEmail(ctx, s.users, login, uuidConfirmation, uuidConf)
+	err = confirmUserEmail(ctx, s.users, login, uuidConfirmation.UuidConfirmation, uuidConf)
 	if err != nil {
 		return err
 	}
@@ -112,9 +113,15 @@ func (s *UserService) ConfirmEmail(ctx context.Context, uuidConf, login string) 
 	return nil
 }
 
-func (s *UserService) ForgotPassword(ctx context.Context, login string) error {
+func (s *UserService) ForgotPassword(ctx context.Context, login, mail string) error {
 	uuidRestore := guuid.New().String()
-	err := s.restore.Create(ctx, login, uuidRestore, time.Now().Add(time.Minute*60))
+
+	err := s.restore.Delete(ctx, login)
+	if err != nil {
+		return err
+	}
+
+	err = s.restore.Create(ctx, login, uuidRestore, time.Now().Add(time.Minute*60))
 	if err != nil {
 		log.Errorf("error in create restore uuid", err)
 		return err
@@ -122,7 +129,7 @@ func (s *UserService) ForgotPassword(ctx context.Context, login string) error {
 
 	restoreTemplate := email.PasswordTemplate{Token: uuidRestore}
 
-	err = s.emailSend.Send(login, restoreTemplate)
+	err = s.emailSend.Send(mail, restoreTemplate)
 	if err != nil {
 		log.Errorf("error in send email", err)
 		return err
@@ -132,7 +139,7 @@ func (s *UserService) ForgotPassword(ctx context.Context, login string) error {
 }
 
 func (s *UserService) RestorePassword(ctx context.Context, uuidRestore, login, newPassword string) error {
-	uuidRest, err := s.restore.Get(ctx, uuidRestore)
+	uuidRest, err := s.restore.Get(ctx, login)
 	if err != nil {
 		log.Errorf("can't find uuid restore", err)
 		return err
@@ -144,6 +151,9 @@ func (s *UserService) RestorePassword(ctx context.Context, uuidRestore, login, n
 	}
 
 	err = updatePassword(ctx, s.users, login, newPassword)
+	if err != nil {
+		return err
+	}
 
 	return err
 }

@@ -18,8 +18,8 @@ func TestSignUp(t *testing.T) {
 	client := protocol.NewAuthServiceClient(clientConnInterface)
 
 	requestSignUp := &protocol.SignUpRequest{
-		Email:    "leshaaa.chaplin66@gmail.com",
-		Login:    "leshaaa",
+		Email:    "lesha.chaplin66@gmail.com",
+		Login:    "les",
 		Password: "chaplin",
 	}
 

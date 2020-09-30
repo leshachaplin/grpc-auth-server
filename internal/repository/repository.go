@@ -37,5 +37,5 @@ type RestorePassword interface {
 type Confirm interface {
 	Delete(ctx context.Context, login string) error
 	Create(ctx context.Context, user string, uuid string, exp time.Time) error
-	Get(ctx context.Context, login string) (string, error)
+	Get(ctx context.Context, login string) (*Confirmation, error)
 }

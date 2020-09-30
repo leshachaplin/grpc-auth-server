@@ -60,7 +60,7 @@ func main() {
 
 	_, cnsl := context.WithCancel(context.Background())
 	userRepo := repository.NewUserRepository(*db)
-	claimsRepo := repository.NewRepositoryOfClaims(session.DB("claims"))
+	claimsRepo := repository.NewRepositoryOfClaims(session.DB("claimes"))
 	refreshRepo := repository.NewRefreshTokenRepository(db)
 	restoreRepo := repository.NewRestoreRepository(*db)
 	confirmRepo := repository.NewConfirmationRepository(*db)

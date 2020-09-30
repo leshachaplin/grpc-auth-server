@@ -54,7 +54,7 @@ func checkIsCorrectData(ctx context.Context, users repository.UserRepository,
 	return nil
 }
 
-func checkIsConfirmEmailSend(ctx context.Context, username string,
+func checkIsConfirmEmailSend(ctx context.Context, username string, mail string,
 	confirm repository.Confirm, emailSend email.EmailSender) error {
 	uuidConfirm := guuid.New().String()
 
@@ -67,7 +67,7 @@ func checkIsConfirmEmailSend(ctx context.Context, username string,
 		return err
 	}
 
-	err = emailSend.Send(username, confirmTemplate)
+	err = emailSend.Send(mail, confirmTemplate)
 	if err != nil {
 		log.Errorf("error in sending email", err)
 		return err

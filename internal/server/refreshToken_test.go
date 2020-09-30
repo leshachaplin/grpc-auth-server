@@ -19,7 +19,8 @@ func TestRefreshToken(t *testing.T) {
 	client := protocol.NewAuthServiceClient(clientConnInterface)
 
 	requestRefresh := &protocol.RefreshTokenRequest{
-		Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODE5NDIzNTMsImxvZ2luIjoibGVzaGEyIn0.t_EfPOQ4ap5F79FM_L2jsyrVtdu_1_ikEC0VbPY4wDo",
+		Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNjAxNDg3OTYyIiwibG9naW4iOiJsZXMifQ.6frwn3JiTZ94gjJ5214trKiKNTHc8UT7cUZjfkyLve0",
+		TokenRefresh: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNjAxNTcyNTYyIiwic3ViIjoiMSIsInV1aWQiOiJsZXMifQ.54soODQk54fz-8aC8Bf2-fzZNx6NGT7o0KZZ6aV9-5k",
 	}
 
 	respRefresh, err := client.RefreshToken(context.Background(), requestRefresh)

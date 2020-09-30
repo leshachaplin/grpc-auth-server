@@ -14,8 +14,8 @@ type User struct {
 	Username  string    `db:"username"`
 	Confirmed bool      `db:"confirmed"`
 	Password  []byte    `db:"password"`
-	CreatedAt time.Time `db:"createdAt"`
-	UpdatedAt time.Time `db:"updatedAt"`
+	CreatedAt time.Time `db:"createdat"`
+	UpdatedAt time.Time `db:"updatedat"`
 }
 
 type UsersRepository struct {
@@ -31,7 +31,7 @@ func NewUserRepository(database sqlx.DB) *UsersRepository {
 func (r *UsersRepository) FindUser(ctx context.Context, username string) (*User, error) {
 	var err error
 	rows, err := r.db.QueryxContext(ctx, `SELECT
-	username, email, createdAt, updatedAt, id
+	username, email, password, confirmed, createdat, updatedat, id
 	FROM "user" WHERE username = $1`, username)
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func (r *UsersRepository) FindUser(ctx context.Context, username string) (*User,
 func (r *UsersRepository) FindUserByEmail(ctx context.Context, email string) (*User, error) {
 	var err error
 	rows, err := r.db.QueryxContext(ctx, `SELECT
-	username, email, createdAt, updatedAt, id
+	username, email, password, confirmed, createdat, updatedat, id
 	FROM "user" WHERE email = $1`, email)
 	if err != nil {
 		return nil, err
@@ -94,7 +94,10 @@ func (r *UsersRepository) Delete(ctx context.Context, login string) error {
 }
 
 func (r *UsersRepository) Create(ctx context.Context, user *User) error {
-	_, err := r.db.QueryContext(ctx, `INSERT into "user" (username, confirmed, Password) values ($1, $2, $3)`, user.Username, false, user.Password)
+	_, err := r.db.QueryContext(ctx, `INSERT into "user" 
+    (username, email, confirmed, Password, createdat, updatedat)
+     values ($1, $2, $3, $4, $5, $6)`, user.Username, user.Email,
+		false, user.Password, time.Now().UTC(), time.Now().UTC())
 	return err
 }
 

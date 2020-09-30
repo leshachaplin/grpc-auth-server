@@ -19,8 +19,12 @@ func TestForgot (t *testing.T) {
 	client := protocol.NewAuthServiceClient(clientConnInterface)
 
 	login := fmt.Sprintf("les")
+	mail := fmt.Sprintf("lesha.chaplin66@gmail.com")
 
-	requestForgot := &protocol.ForgotPasswordRequest{Login:login}
+	requestForgot := &protocol.ForgotPasswordRequest{
+		Login: login,
+		Email: mail,
+	}
 
 	res, err := client.ForgotPassword(context.Background(), requestForgot)
 	if res != nil && err == nil {

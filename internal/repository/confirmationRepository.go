@@ -7,7 +7,7 @@ import (
 )
 
 type Confirmation struct {
-	UuidConfirmation string   `db:"uuidconfirmation"`
+	UuidConfirmation string `db:"uuidconfirmation"`
 }
 
 type ConfirmationRepository struct {
@@ -30,16 +30,15 @@ func (r *ConfirmationRepository) Create(ctx context.Context, login string, uuid 
 	return err
 }
 
-
-func (r *ConfirmationRepository) Get(ctx context.Context, login string) (string , error) {
-	rows, err := r.db.QueryxContext(ctx, `SELECT userid, uuidconfirmation, expiration FROM "confirmation" WHERE userid = $1 and  expiration < $2`, login, time.Now())
+func (r *ConfirmationRepository) Get(ctx context.Context, login string) (*Confirmation, error) {
+	rows, err := r.db.QueryxContext(ctx, `SELECT uuidconfirmation FROM "confirmation" WHERE username = $1 and  expiration > $2`, login, time.Now().UTC())
 	if err != nil {
-		return "", err
+		return nil, err
 	}
-	var confirm string
+	confirm := Confirmation{}
 	for rows.Next() {
 		err := rows.StructScan(&confirm)
 		_ = err
 	}
-	return confirm, err
+	return &confirm, err
 }

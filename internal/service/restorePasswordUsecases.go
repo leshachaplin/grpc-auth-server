@@ -5,19 +5,18 @@ import (
 	"errors"
 	"github.com/leshachaplin/grpc-auth-server/internal/repository"
 	log "github.com/sirupsen/logrus"
-	"strconv"
 	"time"
 )
 
 func checkIsValidUuid(uuid *repository.Restore, uuidRestore string) error {
-	str := strconv.FormatInt(uuid.Expiration, 10)
-	t, err := strconv.ParseInt(str, 10, 64)
-	if err != nil {
-		return err
-	}
+	//str := strconv.FormatInt(uuid.Expiration, 10)
+	//t, err := strconv.ParseInt(str, 10, 64)
+	//if err != nil {
+	//	return err
+	//}
 
-	tm := time.Unix(t, 0)
-	if time.Now().After(tm) {
+	//tm := time.Unix(t, 0)
+	if time.Now().After(uuid.Expiration) {
 		return errors.New("Time out")
 	}
 

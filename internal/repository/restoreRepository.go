@@ -7,10 +7,10 @@ import (
 )
 
 type Restore struct {
-	Login       string `db:"userid"`
-	UuidRestore string `db:"uuidrestore"`
-	Expiration  int64  `db:"exp"`
-	Id          string `db:"id"`
+	Login       string    `db:"username"`
+	UuidRestore string    `db:"uuidrestore"`
+	Expiration  time.Time `db:"exp"`
+	Id          string    `db:"id"`
 }
 
 type RestoreRepository struct {
@@ -34,7 +34,7 @@ func (r *RestoreRepository) Create(ctx context.Context, login string, uuid strin
 }
 
 func (r *RestoreRepository) Get(ctx context.Context, login string) (*Restore, error) {
-	rows, err := r.db.QueryxContext(ctx, `SELECT userid, uuidrestore, exp FROM "restore" WHERE userid = $1`, login)
+	rows, err := r.db.QueryxContext(ctx, `SELECT username, uuidrestore, exp FROM "restore" WHERE username = $1`, login)
 	if err != nil {
 		return nil, err
 	}
