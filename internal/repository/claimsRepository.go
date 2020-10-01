@@ -2,81 +2,65 @@ package repository
 
 import (
 	"context"
-	"github.com/globalsign/mgo"
-	"github.com/globalsign/mgo/bson"
+	"github.com/jmoiron/sqlx"
 )
 
 type Claim struct {
-	Id          bson.ObjectId `bson:"_id"`
-	Login       string        `bson:"login"`
-	Description string        `bson:"key"`
-	Value       string        `bson:"value"`
+	Description string `db:"key"`
+	Value       string `db:"value"`
 }
 
-type RepositoryOfClaims struct {
-	db *mgo.Database
+type ClaimsRepository struct {
+	db *sqlx.DB
 }
 
-func NewRepositoryOfClaims(database *mgo.Database) *RepositoryOfClaims {
-	return &RepositoryOfClaims{
+func NewRepositoryOfClaims(database *sqlx.DB) *ClaimsRepository {
+	return &ClaimsRepository{
 		db: database,
 	}
 }
 
-func (r *RepositoryOfClaims) GetClaims(ctx context.Context, login string) (map[string]string, error) {
+func (r *ClaimsRepository) GetClaims(ctx context.Context, login string) (map[string]string, error) {
 	var err error
-	query := bson.M{
-		"login": bson.M{
-			"$eq": login,
-		},
-	}
-	claims := []Claim{}
 	result := make(map[string]string, 0)
-
-	err = r.db.C("claim").Find(query).All(&claims)
+	rows, err := r.db.QueryxContext(ctx, `SELECT (key, value) FROM "claim" WHERE userid = $1`, login)
 	if err != nil {
 		return nil, err
 	}
-	for _, v := range claims {
-		result[v.Description] = v.Value
+	claim := Claim{}
+	for rows.Next() {
+		err := rows.StructScan(&claim)
+		//return &user, err
+		_ =err
+
+		result[claim.Description] = claim.Value
 	}
 	return result, err
 }
 
-func (r *RepositoryOfClaims) IfExistClaim(ctx context.Context, key, login string) (bool, error) {
-	var err error
-	query := bson.M{
-		"login": bson.M{
-			"$eq": login,
-		},
-	}
-	claims := []Claim{}
-
-	err = r.db.C("claim").Find(query).All(&claims)
+func (r *ClaimsRepository) IfExistClaim(ctx context.Context, key, login string) (bool, error) {
+	rows, err := r.db.QueryxContext(ctx,`SELECT (key, value) FROM "claim" WHERE username = $1 and key = $2 `, login, key)
 	if err != nil {
-		return false, err
+		return false, nil
 	}
-	return true, nil
+	for rows.Next() {
+		return true, err
+	}
+	return false, nil
 }
 
-func (r *RepositoryOfClaims) AddClaims(ctx context.Context, claims map[string]string, login string) error {
+func (r *ClaimsRepository) AddClaims(ctx context.Context, claims map[string]string, login string) error {
 	var err error
 	for k, v := range claims {
-		c := &Claim{
-			Id:          bson.NewObjectId(),
-			Login:       login,
-			Description: k,
-			Value:       v,
-		}
-		err = r.db.C("claim").Insert(&c)
+		_, err = r.db.QueryContext(ctx, `INSERT into "claim" (key, value, username) values ($1, $2, $3) `, k, v, login)
 	}
 	return err
 }
 
-func (r *RepositoryOfClaims) DeleteClaims(ctx context.Context, claims map[string]string, login string) error {
+func (r *ClaimsRepository) DeleteClaims(ctx context.Context, claims map[string]string,  login string) error {
 	var err error
 	for k, v := range claims {
-		_, err = r.db.C("claim").RemoveAll(bson.M{"key" : k, "value":v})
+		_, err = r.db.QueryContext(ctx, `DELETE FROM "claim" WHERE username = $1 and key = $2 and value = $3`,login , k, v)
 	}
 	return err
 }

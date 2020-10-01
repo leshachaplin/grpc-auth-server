@@ -28,56 +28,24 @@ func NewUserRepository(database sqlx.DB) *UsersRepository {
 	}
 }
 
-func (r *UsersRepository) FindUser(ctx context.Context, username string) (*User, error) {
+func (r *UsersRepository) FindUser(ctx context.Context, userField interface{}) (*User, error) {
 	var err error
-	rows, err := r.db.QueryxContext(ctx, `SELECT
-	username, email, password, confirmed, createdat, updatedat, id
-	FROM "user" WHERE username = $1`, username)
+	rows, err := selectFindField(ctx, r.db, userField)
 	if err != nil {
 		return nil, err
 	}
+
 	user := User{}
 	for rows.Next() {
 		err := rows.StructScan(&user)
-		//return &user, err
 		_ = err
 	}
 	return &user, err
 }
 
-func (r *UsersRepository) FindUserByEmail(ctx context.Context, email string) (*User, error) {
+func (r *UsersRepository) IfExistUser(ctx context.Context, userField interface{}) bool {
 	var err error
-	rows, err := r.db.QueryxContext(ctx, `SELECT
-	username, email, password, confirmed, createdat, updatedat, id
-	FROM "user" WHERE email = $1`, email)
-	if err != nil {
-		return nil, err
-	}
-	user := User{}
-	for rows.Next() {
-		err := rows.StructScan(&user)
-		//return &user, err
-		_ = err
-	}
-	return &user, err
-}
-
-func (r *UsersRepository) IfExistUserByUsername(ctx context.Context, login string) bool {
-	var err error
-	rows, err := r.db.QueryxContext(ctx, `SELECT username, confirmed, password FROM "user" WHERE (username) = $1`, login)
-	if err != nil {
-		log.Errorf("Queue error", err)
-		return false
-	}
-	for rows.Next() {
-		return true
-	}
-	return false
-}
-
-func (r *UsersRepository) IfExistUserByEmail(ctx context.Context, email string) bool {
-	var err error
-	rows, err := r.db.QueryxContext(ctx, `SELECT email, confirmed, password FROM "user" WHERE (email) = $1`, email)
+	rows, err := selectFindField(ctx, r.db, userField)
 	if err != nil {
 		log.Errorf("Queue error", err)
 		return false
@@ -101,13 +69,12 @@ func (r *UsersRepository) Create(ctx context.Context, user *User) error {
 	return err
 }
 
-func (r *UsersRepository) Update(ctx context.Context, user *User, state bool) error {
-	_, err := r.db.QueryContext(ctx, `UPDATE "user" set confirmed = $1 where username = $2`, state, user.Username)
-	return err
-}
-
-func (r *UsersRepository) UpdatePassword(ctx context.Context, user *User, newPassword string) error {
-	_, err := r.db.QueryContext(ctx, `UPDATE "user" set password = $1 where username = $2`, newPassword, user.Username)
+func (r *UsersRepository) Update(ctx context.Context, user *User) error {
+	_, err := r.db.QueryContext(ctx, `UPDATE "user" set 
+                  (username, confirmed, id, password, email, createdat, updatedat) =
+                   ($1, $2, $3, $4, $5, $6, $7) where username = $8`,
+                   user.Username, user.Confirmed, user.ID, user.Password, user.Email,
+                   user.CreatedAt, user.UpdatedAt, user.Username)
 	return err
 }
 
@@ -136,7 +103,7 @@ func DeleteMap(a map[string]string, b map[string]string) {
 	}
 }
 
-func IntefaceToString(claims map[string]interface{}) map[string]string {
+func ClaimsConverter(claims map[string]interface{}) map[string]string {
 	result := make(map[string]string)
 	for k, v := range claims {
 		result[k] = v.(string)

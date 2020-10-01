@@ -56,7 +56,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error %v", err)
 	}
-	fmt.Printf("Server is listening on %v ...", cfg.Port)
+	fmt.Printf("Server is listening on %v ...", cfg.GrpcPort)
 
 	_, cnsl := context.WithCancel(context.Background())
 	userRepo := repository.NewUserRepository(*db)

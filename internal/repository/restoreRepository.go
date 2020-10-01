@@ -41,7 +41,6 @@ func (r *RestoreRepository) Get(ctx context.Context, login string) (*Restore, er
 	restore := Restore{}
 	for rows.Next() {
 		err := rows.StructScan(&restore)
-		//return &user, err
 		_ = err
 	}
 	return &restore, err

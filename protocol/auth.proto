@@ -19,10 +19,6 @@ message SignUpRequest {
     string password = 3;
 }
 
-message DeleteRequest {
-    string login = 1;
-}
-
 message AddClaimsRequest {
     string login = 1;
     map<string, string > claims = 2;
@@ -72,7 +68,6 @@ service AuthService {
     rpc SignIn (SignInRequest) returns (SignInResponse);
     rpc SignUp (SignUpRequest) returns (EmptyResponse);
     rpc DeleteClaims (DeleteClaimsRequest) returns (EmptyResponse);
-    rpc Delete (DeleteRequest) returns (EmptyResponse);
     rpc AddClaims (AddClaimsRequest) returns (EmptyResponse);
     rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
     rpc Confirm (ConfirmRequest) returns (EmptyResponse);

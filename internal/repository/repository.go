@@ -18,14 +18,11 @@ type Refresh interface {
 }
 
 type UserRepository interface {
-	FindUser(ctx context.Context, login string) (*User, error)
-	FindUserByEmail(ctx context.Context, email string) (*User, error)
-	IfExistUserByUsername(ctx context.Context, login string) bool
-	IfExistUserByEmail(ctx context.Context, email string) bool
+	FindUser(ctx context.Context, userField interface{}) (*User, error)
+	IfExistUser(ctx context.Context, userField interface{}) bool
 	Delete(ctx context.Context, login string) error
 	Create(ctx context.Context, user *User) error
-	Update(ctx context.Context, user *User, state bool) error
-	UpdatePassword(ctx context.Context, user *User, newPassword string) error
+	Update(ctx context.Context, user *User) error
 }
 
 type RestorePassword interface {

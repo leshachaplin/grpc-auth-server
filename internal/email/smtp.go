@@ -5,6 +5,7 @@ import (
 	"net/smtp"
 )
 
+//TODO: move external grpc server
 type SMTPEmail struct {
 	from string
 	username string

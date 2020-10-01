@@ -34,7 +34,9 @@ func updatePassword(ctx context.Context, users repository.UserRepository,
 		return err
 	}
 
-	err = users.UpdatePassword(ctx, user, string(repository.Hash(newPassword)))
+	user.Password = repository.Hash(newPassword)
+
+	err = users.Update(ctx, user)
 	if err != nil {
 		log.Errorf("error in updating", err)
 		return err

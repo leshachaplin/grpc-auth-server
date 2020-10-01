@@ -19,7 +19,9 @@ func confirmUserEmail(ctx context.Context, users repository.UserRepository,
 		return errors.New("confirm uuid not matched")
 	}
 
-	err = users.Update(ctx, user, true)
+	user.Confirmed = true
+
+	err = users.Update(ctx, user)
 	if err != nil {
 		log.Errorf("error in update user", err)
 		return err

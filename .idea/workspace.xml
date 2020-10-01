@@ -20,16 +20,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d8ca363-7409-475c-b161-a48aa0a98273" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e1b7b317-1656-4115-af8a-62c8c0ec16b9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e1b7b317-1656-4115-af8a-62c8c0ec16b9/storage_v2/_src_/database/su.Yg4AAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e1b7b317-1656-4115-af8a-62c8c0ec16b9/storage_v2/_src_/database/su.Yg4AAA/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e1b7b317-1656-4115-af8a-62c8c0ec16b9/storage_v2/_src_/database/su.Yg4AAA/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e1b7b317-1656-4115-af8a-62c8c0ec16b9/storage_v2/_src_/database/su.Yg4AAA/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/userRepositoryUsecases.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/V5__tableClaim.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/protocol/user.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5e428ec9-0cf2-4beb-8be2-27b044a22e5f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5e428ec9-0cf2-4beb-8be2-27b044a22e5f.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5e428ec9-0cf2-4beb-8be2-27b044a22e5f/storage_v2/_src_/database/auth.qN0tAA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5e428ec9-0cf2-4beb-8be2-27b044a22e5f/storage_v2/_src_/database/auth.qN0tAA/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/server/signUp_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/signUp_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/authUsecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/auth/authUsecases.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/auth/token.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/auth/token.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/email/smtp.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/email/smtp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repository/claimsRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/claimsRepository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repository/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repository/restoreRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/restoreRepository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repository/userRepositiry.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/userRepositiry.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/service/confirmUsecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/confirmUsecases.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/service/refreshTokenUsecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/refreshTokenUsecases.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/service/restorePasswordUsecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/restorePasswordUsecases.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/service/signUpUsecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/signUpUsecases.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/service/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/V1__initial.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/V1__initial.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/protocol/auth.pb.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/protocol/auth.proto" beforeDir="false" afterPath="$PROJECT_DIR$/protocol/auth.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/protocol/auth_grpc.pb.go" beforeDir="false" />
@@ -68,7 +79,8 @@
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../grpc-server" />
+    <property name="go.vendoring.notification.had.been.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../emailSender" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -78,36 +90,61 @@
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/internal" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/migrations" />
       <recent name="$PROJECT_DIR$/internal/server" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/internal" />
-      <recent name="$PROJECT_DIR$/migrations" />
       <recent name="$PROJECT_DIR$/internal/repository" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/repository" />
+      <recent name="$PROJECT_DIR$/internal" />
+    </key>
   </component>
-  <component name="RunManager" selected="Go Build.grpc-auth-server">
-    <configuration name="grpc-auth-server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
+  <component name="RunManager" selected="Go Test.TestRefreshToken in github.com/leshachaplin/grpc-auth-server/internal/server">
+    <configuration name="TestAddClaims in github.com/leshachaplin/grpc-auth-server/internal/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="grpc-auth-server" />
-      <working_directory value="$PROJECT_DIR$" />
-      <EXTENSION ID="net.ashald.envfile">
-        <option name="IS_ENABLED" value="true" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
-          <ENTRY IS_ENABLED="true" PARSER="env" PATH=".env" />
-        </ENTRIES>
-      </EXTENSION>
+      <working_directory value="$PROJECT_DIR$/internal/server" />
+      <framework value="gotest" />
       <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/main.go" />
-      <package value="github.com/leshachaplin/grpc-auth-server" />
+      <package value="github.com/leshachaplin/grpc-auth-server/internal/server" />
       <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestAddClaims\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestConfirm in github.com/leshachaplin/grpc-auth-server/internal/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="grpc-auth-server" />
+      <working_directory value="$PROJECT_DIR$/internal/server" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/leshachaplin/grpc-auth-server/internal/server" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestConfirm\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestRefreshToken in github.com/leshachaplin/grpc-auth-server/internal/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="grpc-auth-server" />
+      <working_directory value="$PROJECT_DIR$/internal/server" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/leshachaplin/grpc-auth-server/internal/server" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestRefreshToken\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestSignIn in github.com/leshachaplin/grpc-auth-server/internal/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="grpc-auth-server" />
+      <working_directory value="$PROJECT_DIR$/internal/server" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/leshachaplin/grpc-auth-server/internal/server" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestSignIn\E$" />
       <method v="2" />
     </configuration>
     <configuration name="TestSignUp in github.com/leshachaplin/grpc-auth-server/internal/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -122,12 +159,18 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Go Build.grpc-auth-server" />
       <item itemvalue="Go Test.TestSignUp in github.com/leshachaplin/grpc-auth-server/internal/server" />
+      <item itemvalue="Go Test.TestConfirm in github.com/leshachaplin/grpc-auth-server/internal/server" />
+      <item itemvalue="Go Test.TestAddClaims in github.com/leshachaplin/grpc-auth-server/internal/server" />
+      <item itemvalue="Go Test.TestSignIn in github.com/leshachaplin/grpc-auth-server/internal/server" />
+      <item itemvalue="Go Test.TestRefreshToken in github.com/leshachaplin/grpc-auth-server/internal/server" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.grpc-auth-server" />
+        <item itemvalue="Go Test.TestRefreshToken in github.com/leshachaplin/grpc-auth-server/internal/server" />
+        <item itemvalue="Go Test.TestSignIn in github.com/leshachaplin/grpc-auth-server/internal/server" />
+        <item itemvalue="Go Test.TestAddClaims in github.com/leshachaplin/grpc-auth-server/internal/server" />
+        <item itemvalue="Go Test.TestConfirm in github.com/leshachaplin/grpc-auth-server/internal/server" />
         <item itemvalue="Go Test.TestSignUp in github.com/leshachaplin/grpc-auth-server/internal/server" />
       </list>
     </recent_temporary>
@@ -160,93 +203,92 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="847" y="426" width="309" height="268" key="EnvironmentVariablesDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1601466412529" />
-    <state x="754" y="340" width="424" height="491" key="FileChooserDialogImpl" timestamp="1601473177919">
+    <state x="754" y="340" width="424" height="491" key="FileChooserDialogImpl" timestamp="1601559523429">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="754" y="340" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1601473177919" />
-    <state width="1874" height="340" key="GridCell.Tab.0.bottom" timestamp="1601476826071">
+    <state x="754" y="340" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1601559523429" />
+    <state width="1874" height="220" key="GridCell.Tab.0.bottom" timestamp="1601488656432">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601476826071" />
-    <state width="1874" height="340" key="GridCell.Tab.0.center" timestamp="1601476826071">
+    <state width="1874" height="220" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601488656432" />
+    <state width="1874" height="220" key="GridCell.Tab.0.center" timestamp="1601488656431">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601476826071" />
-    <state width="1874" height="340" key="GridCell.Tab.0.left" timestamp="1601476826071">
+    <state width="1874" height="220" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601488656431" />
+    <state width="1874" height="220" key="GridCell.Tab.0.left" timestamp="1601488656431">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601476826071" />
-    <state width="1874" height="340" key="GridCell.Tab.0.right" timestamp="1601476826071">
+    <state width="1874" height="220" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601488656431" />
+    <state width="1874" height="220" key="GridCell.Tab.0.right" timestamp="1601488656432">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601476826071" />
-    <state width="1874" height="340" key="GridCell.Tab.1.bottom" timestamp="1601476826071">
+    <state width="1874" height="220" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601488656432" />
+    <state width="1874" height="220" key="GridCell.Tab.1.bottom" timestamp="1601488656431">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.1.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601476826071" />
-    <state width="1874" height="340" key="GridCell.Tab.1.center" timestamp="1601476826070">
+    <state width="1874" height="220" key="GridCell.Tab.1.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601488656431" />
+    <state width="1874" height="220" key="GridCell.Tab.1.center" timestamp="1601488656431">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.1.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601476826070" />
-    <state width="1874" height="340" key="GridCell.Tab.1.left" timestamp="1601476826070">
+    <state width="1874" height="220" key="GridCell.Tab.1.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601488656431" />
+    <state width="1874" height="220" key="GridCell.Tab.1.left" timestamp="1601488656430">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.1.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601476826070" />
-    <state width="1874" height="340" key="GridCell.Tab.1.right" timestamp="1601476826071">
+    <state width="1874" height="220" key="GridCell.Tab.1.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601488656430" />
+    <state width="1874" height="220" key="GridCell.Tab.1.right" timestamp="1601488656431">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601476826071" />
+    <state width="1874" height="220" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601488656431" />
     <state x="449" y="188" width="1022" height="737" key="SettingsEditor" timestamp="1601476377044">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="449" y="188" width="1022" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1601476377044" />
-    <state x="811" y="36" width="287" height="1041" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1601388726925">
+    <state width="960" height="526" key="XDebugger.FullValuePopup" timestamp="1601485880750">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="811" y="36" width="287" height="1041" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1601388726925" />
+    <state width="960" height="526" key="XDebugger.FullValuePopup/0.27.1920.1053@0.27.1920.1053" timestamp="1601485880750" />
+    <state x="811" y="36" width="287" height="1041" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1601558728163">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="811" y="36" width="287" height="1041" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1601558728163" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/repository/confirmationRepository.go</url>
-          <line>27</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/repository/confirmationRepository.go</url>
-          <line>28</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/service/user.go</url>
-          <line>73</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/internal/server/signUp_test.go</url>
           <line>25</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/service/user.go</url>
-          <line>54</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/service/user.go</url>
-          <line>57</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/service/user.go</url>
-          <line>68</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/main.go</url>
+          <url>file://$PROJECT_DIR$/internal/server/signIn_test.go</url>
           <line>25</line>
-          <option name="timeStamp" value="11" />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/server/confirm_test.go</url>
+          <line>28</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/server/forgot_test.go</url>
+          <line>28</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/server/restore_test.go</url>
+          <line>30</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/service/refreshTokenUsecases.go</url>
+          <line>35</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/service/refreshTokenUsecases.go</url>
+          <line>14</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

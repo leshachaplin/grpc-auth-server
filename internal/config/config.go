@@ -3,6 +3,7 @@ package config
 // if using go modules
 
 import (
+	"database/sql"
 	"fmt"
 	"github.com/caarlos0/env/v6"
 )
@@ -12,9 +13,12 @@ type Config struct {
 	GrpcPort         string `env:"GrpcPort" envDefault:"0.0.0.0:50051"`
 	SecretKeyAuth    string `env:"SecretKeyAuth"`
 	SecretKeyRefresh string `env:"SecretKeyRefresh"`
-	PostgresConStr   string `env:"PostgresConStr"`
+	PostgresConnectionSecret   string `env:"PostgresConStr"`
 	MongoConStr      string `env:"MongoConStr"`
 	SMTPConStr       string `env:"SMTPConStr"`
+	PostgrsConnection *sql.DB
+	//TODO: initialize all there
+
 }
 
 func NewConfig() *Config {

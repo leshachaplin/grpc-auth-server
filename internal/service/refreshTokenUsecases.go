@@ -20,7 +20,7 @@ func getUuids(tokenAuth, tokenReqRefresh,
 		return "", "", err
 	}
 
-	claims := repository.IntefaceToString(token.Claims.(jwt.MapClaims))
+	claims := repository.ClaimsConverter(token.Claims.(jwt.MapClaims))
 
 	tokenRefresh, err := auth.GetTokenRefresh(tokenReqRefresh, secretKeyRefresh)
 	if err != nil {
@@ -28,7 +28,7 @@ func getUuids(tokenAuth, tokenReqRefresh,
 		return "", "", err
 	}
 
-	claimsR := repository.IntefaceToString(tokenRefresh.Claims.(jwt.MapClaims))
+	claimsR := repository.ClaimsConverter(tokenRefresh.Claims.(jwt.MapClaims))
 
 	return claims["login"], claimsR["uuid"], nil
 }
@@ -74,7 +74,9 @@ func refreshToken(ctx context.Context, users repository.UserRepository,
 			return "", "", err
 		}
 
-		err = users.Update(ctx, user, true)
+		user.Confirmed = true
+
+		err = users.Update(ctx, user)
 		if err != nil {
 			log.Errorf("error in update user", err)
 			return "", "", err

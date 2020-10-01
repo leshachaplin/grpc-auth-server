@@ -61,7 +61,7 @@ func (j *JWT) GetExpTimeToRefreshToken(token string) (time.Time, error) {
 	if err != nil {
 		return time.Unix(0, 0), err
 	}
-	rtClaims := repository.IntefaceToString(rt)
+	rtClaims := repository.ClaimsConverter(rt)
 	t, err := strconv.ParseInt(rtClaims["exp"], 10, 64)
 	if err != nil {
 		return time.Unix(0, 0), err

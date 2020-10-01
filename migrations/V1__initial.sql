@@ -1,6 +1,6 @@
 CREATE TABLE public.user
 (
-    ID        serial ,
+    ID        serial,
     Username  CHARACTER VARYING(64) PRIMARY KEY,
     Confirmed boolean NOT NULL,
     Email     CHARACTER VARYING(64),

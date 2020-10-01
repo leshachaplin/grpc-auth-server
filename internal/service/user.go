@@ -24,7 +24,11 @@ type UserService struct {
 }
 
 //TODO: Restore - delete after usage
-func New(usersRepository repository.UsersRepository, claims repository.RepositoryOfClaims,
+//TODO: change databases
+//TODO: create uuids to AT & RT and save them into redis
+//TODO: automatizate createdAt & updatedAt
+
+func New(usersRepository repository.UsersRepository, claims repository.ClaimsRepository,
 	configAws config.ConfigAws, config conf.Config, tokenRepository repository.RefreshTokenRepository,
 	restoreR repository.RestoreRepository, confirmR repository.ConfirmationRepository,
 	smtp email.SMTPEmail) *UserService {
@@ -166,7 +170,7 @@ func (s *UserService) RefreshToken(ctx context.Context, tokenReqAuth,
 }
 
 func (s *UserService) ChangePassword(ctx context.Context, mail, oldPassword, newPassword string) error {
-	user, err := s.users.FindUserByEmail(ctx, mail)
+	user, err := s.users.FindUser(ctx, mail)
 	if err != nil {
 		log.Errorf("error in find user by email", err)
 		return err
@@ -177,7 +181,9 @@ func (s *UserService) ChangePassword(ctx context.Context, mail, oldPassword, new
 		return errors.New("password invalid")
 	}
 
-	err = s.users.UpdatePassword(ctx, user, newPassword)
+	user.Password = repository.Hash(newPassword)
+
+	err = s.users.Update(ctx, user)
 
 	return err
 }

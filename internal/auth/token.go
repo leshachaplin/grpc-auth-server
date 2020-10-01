@@ -13,7 +13,7 @@ func CreatTokenAuth(login string, claim map[string]string, secretKey string) (st
 	var err error
 	claims := jwt.MapClaims{}
 	claims["login"] = login
-	repository.MergeMaps(repository.IntefaceToString(claims), claim)
+	repository.MergeMaps(repository.ClaimsConverter(claims), claim)
 	claims["exp"] = strconv.Itoa(int(time.Now().Add(time.Minute * 30).Unix()))
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	t, err := token.SignedString([]byte(secretKey))
@@ -72,7 +72,7 @@ func GetExpirationTimeToRefreshToken(token, secretKeyRefresh string) (time.Time,
 	if err != nil {
 		return time.Unix(0,0), err
 	}
-	rtClaims := repository.IntefaceToString(rt.Claims.(jwt.MapClaims))
+	rtClaims := repository.ClaimsConverter(rt.Claims.(jwt.MapClaims))
 	t, err := strconv.ParseInt(rtClaims["exp"], 10, 64)
 	if err != nil {
 		return time.Unix(0,0), err
