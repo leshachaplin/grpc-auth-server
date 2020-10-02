@@ -1,14 +1,14 @@
-package server
+package auth
 
 import (
 	"context"
-	"github.com/leshachaplin/grpc-auth-server/internal/service"
+	"github.com/leshachaplin/grpc-auth-server/internal/service/auth"
 	"github.com/leshachaplin/grpc-auth-server/protocol"
 	log "github.com/sirupsen/logrus"
 )
 
 type Server struct{
-	Rpc service.UserService
+	Rpc auth.AuthenticationService
 }
 
 func (s *Server) AddClaims(ctx context.Context, req *protocol.AddClaimsRequest) (*protocol.EmptyResponse, error) {
@@ -110,7 +110,7 @@ func (s *Server) ChangePassword(ctx context.Context, req *protocol.ChangePasswor
 }
 
 func (s *Server) ForgotPassword(ctx context.Context, req *protocol.ForgotPasswordRequest) (*protocol.EmptyResponse, error) {
-	err := s.Rpc.ForgotPassword(ctx, req.Login, req.Email)
+	err := s.Rpc.ForgotPassword(ctx, req.Login)
 	if err != nil {
 		log.Errorf("error in forgot password method: %s", err)
 		return nil, err

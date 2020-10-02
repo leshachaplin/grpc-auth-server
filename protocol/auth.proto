@@ -61,7 +61,6 @@ message ChangePasswordRequest {
 
 message ForgotPasswordRequest {
     string login = 1;
-    string email = 2;
 }
 
 service AuthService {

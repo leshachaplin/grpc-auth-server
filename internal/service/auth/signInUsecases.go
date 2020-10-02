@@ -1,8 +1,7 @@
-package service
+package auth
 
 import (
 	"context"
-	"github.com/leshachaplin/config"
 	"github.com/leshachaplin/grpc-auth-server/internal/auth"
 	conf "github.com/leshachaplin/grpc-auth-server/internal/config"
 	"github.com/leshachaplin/grpc-auth-server/internal/repository"
@@ -11,16 +10,9 @@ import (
 )
 
 func createTokens(ctx context.Context, user *repository.User, cfg *conf.Config,
-	claims repository.Claims, refresh repository.Refresh, cfgAws *config.ConfigAws,
+	claims repository.Claims, refresh repository.Refresh,
 	password, username string) (token string, refreshToken string, err error) {
-	secretKeyAuth, err := cfgAws.GetSecret(cfg.SecretKeyAuth)
-	if err != nil {
-		return "", "", err
-	}
-	secretKeyRefresh, err := cfgAws.GetSecret(cfg.SecretKeyRefresh)
-	if err != nil {
-		return "", "", err
-	}
+
 	if user != nil {
 		err = repository.VerifyPassword(string(user.Password), password)
 		if user.Username == username && err == nil {
@@ -31,13 +23,13 @@ func createTokens(ctx context.Context, user *repository.User, cfg *conf.Config,
 				return "", "", err
 			}
 
-			token, err = auth.CreatTokenAuth(username, claims, secretKeyAuth.ApiKey)
+			token, err = auth.CreatTokenAuth(username, claims, cfg.SecretKeyAuth)
 			if err != nil {
 				log.Errorf("error in create new token", err)
 				return "", "", err
 			}
 
-			refreshToken, err = auth.CreatTokenRefresh(username, secretKeyRefresh.ApiKey)
+			refreshToken, err = auth.CreatTokenRefresh(username, cfg.SecretKeyRefresh)
 			if err != nil {
 				log.Errorf("error in create new refresh token", err)
 				return "", "", err

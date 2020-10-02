@@ -1,4 +1,4 @@
-package server
+package auth
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestAddClaims(t *testing.T) {
+func TestConfirm(t *testing.T) {
 	opts := grpc.WithInsecure()
 	clientConnInterface, err := grpc.Dial("0.0.0.0:50051", opts)
 	if err != nil {
@@ -19,20 +19,18 @@ func TestAddClaims(t *testing.T) {
 	client := protocol.NewAuthServiceClient(clientConnInterface)
 
 	login := fmt.Sprintf("les")
+	uuid := fmt.Sprintf("8520e916-f8d4-4341-a3de-8585d42c8c50")
 
-	requestAddClaims := &protocol.AddClaimsRequest{
-		Login: login,
-		Claims: map[string]string{
-			"role":"admin",
-			"asdasd":"sdsd",
-		},
+	requestConfirm := &protocol.ConfirmRequest{
+		Login:    login,
+		UuidConfirm: uuid,
 	}
 
-	responceAddClaims, err := client.AddClaims(context.Background(), requestAddClaims)
-	if err == nil {
-		fmt.Printf("add claims to user%s\n", login)
+	res, err := client.Confirm(context.Background(), requestConfirm)
+	if res != nil && err == nil {
+		fmt.Println("create new user adn create token")
 	} else {
-		t.Errorf("add claims is failed, got:%s  , want:%s ", err, responceAddClaims )
+		t.Errorf("Confirmation is failed, got:%s   ", err)
 	}
-}
 
+}

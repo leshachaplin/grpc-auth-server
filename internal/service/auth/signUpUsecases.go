@@ -1,11 +1,13 @@
-package service
+package auth
 
 import (
 	"context"
 	"errors"
 	"fmt"
 	guuid "github.com/google/uuid"
-	"github.com/leshachaplin/grpc-auth-server/internal/email"
+	"github.com/labstack/echo/v4"
+	emailProto "github.com/leshachaplin/emailSender/protocol"
+	"github.com/leshachaplin/grpc-auth-server/internal/config"
 	"github.com/leshachaplin/grpc-auth-server/internal/repository"
 	log "github.com/sirupsen/logrus"
 	"strings"
@@ -106,24 +108,33 @@ func checkIsCorrectData(ctx context.Context, users repository.UserRepository,
 	return nil
 }
 
-func checkIsConfirmEmailSend(ctx context.Context, username string, mail string,
-	confirm repository.Confirm, emailSend email.EmailSender) error {
+func checkIsConfirmEmailSend(ctx context.Context, username string, cfg *config.Config,
+	mail repository.Email, confirm repository.Confirm) error {
+
 	uuidConfirm := guuid.New().String()
 
-	confirmTemplate := email.PasswordTemplate{Token: uuidConfirm}
 
 	err := confirm.Create(ctx, username, uuidConfirm,  time.Now().Add(time.Minute*60*10).UTC())
-
 	if err != nil {
 		log.Errorf("error in confirm", err)
 		return err
 	}
 
-	err = emailSend.Send(mail, confirmTemplate)
-	if err != nil {
-		log.Errorf("error in sending email", err)
+	c := ctx.(echo.Context)
+	req := &emailProto.SendRequest{}
+
+	if err := c.Bind(&req); err != nil {
+		log.Errorf("echo.Context binding Error ForgotPassword %s", err)
 		return err
 	}
+
+	err = mail.Create(ctx, req.Email)
+	if err != nil {
+		log.Errorf("Error in create new email: EmailRepository %s", err)
+		return err
+	}
+
+	_, err = cfg.SMTPClient.Send(ctx, req)
 
 	return nil
 }

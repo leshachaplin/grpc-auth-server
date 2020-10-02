@@ -1,4 +1,4 @@
-package server
+package auth
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestDelete(t *testing.T) {
+func TestForgot (t *testing.T) {
 	opts := grpc.WithInsecure()
 	clientConnInterface, err := grpc.Dial("0.0.0.0:50051", opts)
 	if err != nil {
@@ -19,13 +19,17 @@ func TestDelete(t *testing.T) {
 	client := protocol.NewAuthServiceClient(clientConnInterface)
 
 	login := fmt.Sprintf("les")
+	mail := fmt.Sprintf("lesha.chaplin66@gmail.com")
 
-	requestDelete := &protocol.DeleteRequest{Login: login}
+	requestForgot := &protocol.ForgotPasswordRequest{
+		Login: login,
+		Email: mail,
+	}
 
-	responseDelete, err := client.Delete(context.Background(), requestDelete)
-	if err == nil {
-		fmt.Printf("delete user:%s  %s\n", requestDelete.Login, responseDelete)
+	res, err := client.ForgotPassword(context.Background(), requestForgot)
+	if res != nil && err == nil {
+		fmt.Println("create restore token")
 	} else {
-		t.Errorf("deleting user is failed, got:%s  , want:%s ", err, responseDelete )
+		t.Errorf("Forgot is failed, got:%s   ", err)
 	}
 }

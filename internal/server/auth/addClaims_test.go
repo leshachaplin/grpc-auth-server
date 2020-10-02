@@ -1,4 +1,4 @@
-package server
+package auth
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestDeleteClaims(t *testing.T) {
+func TestAddClaims(t *testing.T) {
 	opts := grpc.WithInsecure()
 	clientConnInterface, err := grpc.Dial("0.0.0.0:50051", opts)
 	if err != nil {
@@ -20,15 +20,19 @@ func TestDeleteClaims(t *testing.T) {
 
 	login := fmt.Sprintf("les")
 
-	reqDeleteClaims := &protocol.DeleteClaimsRequest{
-		Login:  login,
-		Claims: map[string]string{"asdasd": "sdsd"},
+	requestAddClaims := &protocol.AddClaimsRequest{
+		Login: login,
+		Claims: map[string]string{
+			"role":"admin",
+			"asdasd":"sdsd",
+		},
 	}
 
-	responceDeleteClaims, err := client.DeleteClaims(context.Background(), reqDeleteClaims)
+	responceAddClaims, err := client.AddClaims(context.Background(), requestAddClaims)
 	if err == nil {
-		fmt.Printf("delete claims%s\n", responceDeleteClaims)
+		fmt.Printf("add claims to user%s\n", login)
 	} else {
- 		t.Errorf("deleting claims is failed, got:%s  , want:%s ", err, responceDeleteClaims )
+		t.Errorf("add claims is failed, got:%s  , want:%s ", err, responceAddClaims )
 	}
 }
+

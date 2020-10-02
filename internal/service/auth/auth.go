@@ -1,50 +1,47 @@
-package service
+package auth
 
 import (
 	"context"
 	"errors"
 	guuid "github.com/google/uuid"
-	"github.com/leshachaplin/config"
+	"github.com/labstack/echo/v4"
+	emailProto "github.com/leshachaplin/emailSender/protocol"
 	conf "github.com/leshachaplin/grpc-auth-server/internal/config"
-	"github.com/leshachaplin/grpc-auth-server/internal/email"
 	"github.com/leshachaplin/grpc-auth-server/internal/repository"
 	log "github.com/sirupsen/logrus"
 	"time"
 )
 
-type UserService struct {
+type AuthenticationService struct {
 	users     repository.UserRepository
 	refresh   repository.Refresh
 	claims    repository.Claims
-	cfgAws    *config.ConfigAws
+	email     repository.Email
 	cfg       *conf.Config
 	restore   repository.RestorePassword
 	confirm   repository.Confirm
-	emailSend email.EmailSender
 }
 
-//TODO: Restore - delete after usage
 //TODO: change databases
-//TODO: create uuids to AT & RT and save them into redis
 //TODO: automatizate createdAt & updatedAt
+//TODO: Restore - delete after usage
+//TODO: create uuids to AT & RT and save them
 
 func New(usersRepository repository.UsersRepository, claims repository.ClaimsRepository,
-	configAws config.ConfigAws, config conf.Config, tokenRepository repository.RefreshTokenRepository,
-	restoreR repository.RestoreRepository, confirmR repository.ConfirmationRepository,
-	smtp email.SMTPEmail) *UserService {
-	return &UserService{
+	mail repository.EmailRepository, config conf.Config, tokenRepository repository.RefreshTokenRepository,
+	restoreR repository.RestoreRepository, confirmR repository.ConfirmationRepository) *AuthenticationService {
+	return &AuthenticationService{
 		users:     &usersRepository,
 		refresh:   &tokenRepository,
 		claims:    &claims,
-		cfgAws:    &configAws,
+		email:     &mail,
 		cfg:       &config,
 		restore:   &restoreR,
 		confirm:   &confirmR,
-		emailSend: &smtp,
 	}
 }
 
-func (s *UserService) SignIn(ctx context.Context, login string, password string) (string, string, error) {
+func (s *AuthenticationService) SignIn(ctx context.Context, login string, password string) (string, string, error) {
 	user, err := s.users.FindUser(ctx, login)
 	if err != nil {
 		log.Errorf("error in find user", err)
@@ -52,12 +49,12 @@ func (s *UserService) SignIn(ctx context.Context, login string, password string)
 	}
 
 	token, refreshToken, err := createTokens(ctx, user, s.cfg, s.claims,
-		s.refresh, s.cfgAws, password, login)
+		s.refresh, password, login)
 
 	return token, refreshToken, err
 }
 
-func (s *UserService) SignUp(ctx context.Context, mail string, username string, password string) error {
+func (s *AuthenticationService) SignUp(ctx context.Context, mail string, username string, password string) error {
 	var err error
 
 	err = checkIsCorrectData(ctx, s.users, mail, username, password)
@@ -76,7 +73,7 @@ func (s *UserService) SignUp(ctx context.Context, mail string, username string, 
 		return err
 	}
 
-	err = checkIsConfirmEmailSend(ctx, username, mail, s.confirm, s.emailSend)
+	err = checkIsConfirmEmailSend(ctx, username, s.cfg, s.email, s.confirm)
 	if err != nil {
 		return err
 	}
@@ -84,19 +81,19 @@ func (s *UserService) SignUp(ctx context.Context, mail string, username string, 
 	return err
 }
 
-func (s *UserService) ResendEmail(ctx context.Context, login, mail string) error {
+func (s *AuthenticationService) ResendEmail(ctx context.Context, login, mail string) error {
 	err := s.confirm.Delete(ctx, login)
 	if err != nil {
 		log.Errorf("error in delete uuid confirmation", err)
 		return err
 	}
 
-	err = checkIsConfirmEmailSend(ctx, login, mail, s.confirm, s.emailSend)
+	err = checkIsConfirmEmailSend(ctx, login, s.cfg, s.email, s.confirm)
 
 	return err
 }
 
-func (s *UserService) ConfirmEmail(ctx context.Context, uuidConf, login string) error {
+func (s *AuthenticationService) ConfirmEmail(ctx context.Context, uuidConf, login string) error {
 	uuidConfirmation, err := s.confirm.Get(ctx, login)
 	if err != nil {
 		log.Errorf("error in confirm email repo")
@@ -117,7 +114,8 @@ func (s *UserService) ConfirmEmail(ctx context.Context, uuidConf, login string) 
 	return nil
 }
 
-func (s *UserService) ForgotPassword(ctx context.Context, login, mail string) error {
+func (s *AuthenticationService) ForgotPassword(ctx context.Context, login string) error {
+
 	uuidRestore := guuid.New().String()
 
 	err := s.restore.Delete(ctx, login)
@@ -131,18 +129,26 @@ func (s *UserService) ForgotPassword(ctx context.Context, login, mail string) er
 		return err
 	}
 
-	restoreTemplate := email.PasswordTemplate{Token: uuidRestore}
+	c := ctx.(echo.Context)
+	req := &emailProto.SendRequest{}
 
-	err = s.emailSend.Send(mail, restoreTemplate)
-	if err != nil {
-		log.Errorf("error in send email", err)
+	if err := c.Bind(&req); err != nil {
+		log.Errorf("echo.Context binding Error ForgotPassword %s", err)
 		return err
 	}
+
+	err = s.email.Create(ctx, req.Email)
+	if err != nil {
+		log.Errorf("Error in create new email: EmailRepository %s", err)
+		return err
+	}
+
+	_, err = s.cfg.SMTPClient.Send(ctx, req)
 
 	return err
 }
 
-func (s *UserService) RestorePassword(ctx context.Context, uuidRestore, login, newPassword string) error {
+func (s *AuthenticationService) RestorePassword(ctx context.Context, uuidRestore, login, newPassword string) error {
 	uuidRest, err := s.restore.Get(ctx, login)
 	if err != nil {
 		log.Errorf("can't find uuid restore", err)
@@ -162,14 +168,14 @@ func (s *UserService) RestorePassword(ctx context.Context, uuidRestore, login, n
 	return err
 }
 
-func (s *UserService) RefreshToken(ctx context.Context, tokenReqAuth,
+func (s *AuthenticationService) RefreshToken(ctx context.Context, tokenReqAuth,
 	tokenReqRefresh string) (string, string, error) {
 	newToken, newRefToken, err := refreshToken(ctx, s.users, s.refresh, s.claims,
-	s.cfg, s.cfgAws, tokenReqAuth, tokenReqRefresh)
+		s.cfg, tokenReqAuth, tokenReqRefresh)
 	return newToken, newRefToken, err
 }
 
-func (s *UserService) ChangePassword(ctx context.Context, mail, oldPassword, newPassword string) error {
+func (s *AuthenticationService) ChangePassword(ctx context.Context, mail, oldPassword, newPassword string) error {
 	user, err := s.users.FindUser(ctx, mail)
 	if err != nil {
 		log.Errorf("error in find user by email", err)
@@ -188,14 +194,14 @@ func (s *UserService) ChangePassword(ctx context.Context, mail, oldPassword, new
 	return err
 }
 
-func (s *UserService) DeleteClaims(ctx context.Context, claims map[string]string, login string) error {
+func (s *AuthenticationService) DeleteClaims(ctx context.Context, claims map[string]string, login string) error {
 	return s.claims.DeleteClaims(ctx, claims, login)
 }
 
-func (s *UserService) AddClaims(claims map[string]string, ctx context.Context, login string) error {
+func (s *AuthenticationService) AddClaims(claims map[string]string, ctx context.Context, login string) error {
 	return s.claims.AddClaims(ctx, claims, login)
 }
 
-func (s *UserService) Delete(ctx context.Context, login string) error {
+func (s *AuthenticationService) Delete(ctx context.Context, login string) error {
 	return s.users.Delete(ctx, login)
 }

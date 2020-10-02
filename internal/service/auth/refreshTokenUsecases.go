@@ -1,11 +1,10 @@
-package service
+package auth
 
 import (
 	"context"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	guuid "github.com/google/uuid"
-	"github.com/leshachaplin/config"
 	"github.com/leshachaplin/grpc-auth-server/internal/auth"
 	conf "github.com/leshachaplin/grpc-auth-server/internal/config"
 	"github.com/leshachaplin/grpc-auth-server/internal/repository"
@@ -34,19 +33,10 @@ func getUuids(tokenAuth, tokenReqRefresh,
 }
 
 func refreshToken(ctx context.Context, users repository.UserRepository,
-	refresh repository.Refresh, claims repository.Claims, cfg *conf.Config, cfgAws *config.ConfigAws,
+	refresh repository.Refresh, claims repository.Claims, cfg *conf.Config,
 	tokenAuth, tokenReqRefresh string) (newToken string, newRefToken string, err error) {
 
-	secretKeyAuth, err := cfgAws.GetSecret(cfg.SecretKeyAuth)
-	if err != nil {
-		return "", "", err
-	}
-	secretKeyRefresh, err := cfgAws.GetSecret(cfg.SecretKeyRefresh)
-	if err != nil {
-		return "", "", err
-	}
-
-	authUuid, refreshUuid, err := getUuids(tokenAuth, tokenReqRefresh, secretKeyAuth.ApiKey, secretKeyRefresh.ApiKey)
+	authUuid, refreshUuid, err := getUuids(tokenAuth, tokenReqRefresh, cfg.SecretKeyAuth, cfg.SecretKeyRefresh)
 	if err != nil {
 		return "", "", err
 	}
@@ -88,14 +78,14 @@ func refreshToken(ctx context.Context, users repository.UserRepository,
 			return "", "", nil
 		}
 		uuid := guuid.New().String()
-		newToken, err = auth.CreatTokenAuth(authUuid, newClaims, secretKeyAuth.ApiKey)
-		newRefToken, err = auth.CreatTokenRefresh(uuid, secretKeyRefresh.ApiKey)
+		newToken, err = auth.CreatTokenAuth(authUuid, newClaims, cfg.SecretKeyAuth)
+		newRefToken, err = auth.CreatTokenRefresh(uuid, cfg.SecretKeyRefresh)
 		if err != nil {
 			log.Errorf("error in create new tokens", err)
 			return "", "", err
 		}
 
-		t, err := auth.GetExpirationTimeToRefreshToken(newRefToken, secretKeyRefresh.ApiKey)
+		t, err := auth.GetExpirationTimeToRefreshToken(newRefToken, cfg.SecretKeyRefresh)
 		if err != nil {
 			log.Errorf("error in get expiration time", err)
 			return "", "", err

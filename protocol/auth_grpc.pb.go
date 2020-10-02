@@ -20,7 +20,6 @@ type AuthServiceClient interface {
 	SignIn(ctx context.Context, in *SignInRequest, opts ...grpc.CallOption) (*SignInResponse, error)
 	SignUp(ctx context.Context, in *SignUpRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
 	DeleteClaims(ctx context.Context, in *DeleteClaimsRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
 	AddClaims(ctx context.Context, in *AddClaimsRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 	Confirm(ctx context.Context, in *ConfirmRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
@@ -70,19 +69,6 @@ var authServiceDeleteClaimsStreamDesc = &grpc.StreamDesc{
 func (c *authServiceClient) DeleteClaims(ctx context.Context, in *DeleteClaimsRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
 	out := new(EmptyResponse)
 	err := c.cc.Invoke(ctx, "/protocol.AuthService/DeleteClaims", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-var authServiceDeleteStreamDesc = &grpc.StreamDesc{
-	StreamName: "Delete",
-}
-
-func (c *authServiceClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
-	err := c.cc.Invoke(ctx, "/protocol.AuthService/Delete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -175,7 +161,6 @@ type AuthServiceService struct {
 	SignIn         func(context.Context, *SignInRequest) (*SignInResponse, error)
 	SignUp         func(context.Context, *SignUpRequest) (*EmptyResponse, error)
 	DeleteClaims   func(context.Context, *DeleteClaimsRequest) (*EmptyResponse, error)
-	Delete         func(context.Context, *DeleteRequest) (*EmptyResponse, error)
 	AddClaims      func(context.Context, *AddClaimsRequest) (*EmptyResponse, error)
 	RefreshToken   func(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	Confirm        func(context.Context, *ConfirmRequest) (*EmptyResponse, error)
@@ -232,23 +217,6 @@ func (s *AuthServiceService) deleteClaims(_ interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return s.DeleteClaims(ctx, req.(*DeleteClaimsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-func (s *AuthServiceService) delete(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return s.Delete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     s,
-		FullMethod: "/protocol.AuthService/Delete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return s.Delete(ctx, req.(*DeleteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -373,11 +341,6 @@ func RegisterAuthServiceService(s grpc.ServiceRegistrar, srv *AuthServiceService
 			return nil, status.Errorf(codes.Unimplemented, "method DeleteClaims not implemented")
 		}
 	}
-	if srvCopy.Delete == nil {
-		srvCopy.Delete = func(context.Context, *DeleteRequest) (*EmptyResponse, error) {
-			return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
-		}
-	}
 	if srvCopy.AddClaims == nil {
 		srvCopy.AddClaims = func(context.Context, *AddClaimsRequest) (*EmptyResponse, error) {
 			return nil, status.Errorf(codes.Unimplemented, "method AddClaims not implemented")
@@ -422,10 +385,6 @@ func RegisterAuthServiceService(s grpc.ServiceRegistrar, srv *AuthServiceService
 			{
 				MethodName: "DeleteClaims",
 				Handler:    srvCopy.deleteClaims,
-			},
-			{
-				MethodName: "Delete",
-				Handler:    srvCopy.delete,
 			},
 			{
 				MethodName: "AddClaims",
@@ -483,11 +442,6 @@ func NewAuthServiceService(s interface{}) *AuthServiceService {
 		ns.DeleteClaims = h.DeleteClaims
 	}
 	if h, ok := s.(interface {
-		Delete(context.Context, *DeleteRequest) (*EmptyResponse, error)
-	}); ok {
-		ns.Delete = h.Delete
-	}
-	if h, ok := s.(interface {
 		AddClaims(context.Context, *AddClaimsRequest) (*EmptyResponse, error)
 	}); ok {
 		ns.AddClaims = h.AddClaims
@@ -528,7 +482,6 @@ type UnstableAuthServiceService interface {
 	SignIn(context.Context, *SignInRequest) (*SignInResponse, error)
 	SignUp(context.Context, *SignUpRequest) (*EmptyResponse, error)
 	DeleteClaims(context.Context, *DeleteClaimsRequest) (*EmptyResponse, error)
-	Delete(context.Context, *DeleteRequest) (*EmptyResponse, error)
 	AddClaims(context.Context, *AddClaimsRequest) (*EmptyResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	Confirm(context.Context, *ConfirmRequest) (*EmptyResponse, error)

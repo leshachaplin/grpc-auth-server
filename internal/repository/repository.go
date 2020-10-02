@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	emailProto "github.com/leshachaplin/emailSender/protocol"
 	"time"
 )
 
@@ -29,6 +30,10 @@ type RestorePassword interface {
 	Delete(ctx context.Context, login string) error
 	Create(ctx context.Context, login string, uuid string, exp time.Time) error
 	Get(ctx context.Context, uid string) (*Restore, error)
+}
+
+type Email interface {
+	Create(ctx context.Context, mail *emailProto.SMTPEmail) error
 }
 
 type Confirm interface {

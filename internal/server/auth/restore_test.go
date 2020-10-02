@@ -1,4 +1,4 @@
-package server
+package auth
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestConfirm(t *testing.T) {
+func TestRestore(t *testing.T) {
 	opts := grpc.WithInsecure()
 	clientConnInterface, err := grpc.Dial("0.0.0.0:50051", opts)
 	if err != nil {
@@ -19,18 +19,20 @@ func TestConfirm(t *testing.T) {
 	client := protocol.NewAuthServiceClient(clientConnInterface)
 
 	login := fmt.Sprintf("les")
-	uuid := fmt.Sprintf("8520e916-f8d4-4341-a3de-8585d42c8c50")
+	newPassword := fmt.Sprintf("jopa")
+	uuid := fmt.Sprintf("b57d6d81-b85e-4e4a-9459-7d12bfb3f8fe")
 
-	requestConfirm := &protocol.ConfirmRequest{
-		Login:    login,
-		UuidConfirm: uuid,
+	requestRestore := &protocol.RestoreRequest{
+		Token:       uuid,
+		Login:       login,
+		NewPassword: newPassword,
 	}
 
-	res, err := client.Confirm(context.Background(), requestConfirm)
+	res, err := client.Restore(context.Background(), requestRestore)
 	if res != nil && err == nil {
-		fmt.Println("create new user adn create token")
+		fmt.Println("Restore password")
 	} else {
-		t.Errorf("Confirmation is failed, got:%s   ", err)
+		t.Errorf("Restored is failed, got:%s   ", err)
 	}
 
 }
