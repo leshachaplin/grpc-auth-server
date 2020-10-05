@@ -30,7 +30,7 @@ func TestAddClaims(t *testing.T) {
 
 	responceAddClaims, err := client.AddClaims(context.Background(), requestAddClaims)
 	if err == nil {
-		fmt.Printf("add claims to user%s\n", login)
+		fmt.Printf("add claims to users%s\n", login)
 	} else {
 		t.Errorf("add claims is failed, got:%s  , want:%s ", err, responceAddClaims )
 	}

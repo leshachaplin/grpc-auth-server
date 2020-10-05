@@ -18,14 +18,14 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AuthServiceClient interface {
 	SignIn(ctx context.Context, in *SignInRequest, opts ...grpc.CallOption) (*SignInResponse, error)
-	SignUp(ctx context.Context, in *SignUpRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	DeleteClaims(ctx context.Context, in *DeleteClaimsRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	AddClaims(ctx context.Context, in *AddClaimsRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	SignUp(ctx context.Context, in *SignUpRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error)
+	DeleteClaims(ctx context.Context, in *DeleteClaimsRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error)
+	AddClaims(ctx context.Context, in *AddClaimsRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
-	Confirm(ctx context.Context, in *ConfirmRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	Restore(ctx context.Context, in *RestoreRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	ForgotPassword(ctx context.Context, in *ForgotPasswordRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	Confirm(ctx context.Context, in *ConfirmRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error)
+	Restore(ctx context.Context, in *RestoreRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error)
+	ForgotPassword(ctx context.Context, in *ForgotPasswordRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error)
+	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error)
 }
 
 type authServiceClient struct {
@@ -53,8 +53,8 @@ var authServiceSignUpStreamDesc = &grpc.StreamDesc{
 	StreamName: "SignUp",
 }
 
-func (c *authServiceClient) SignUp(ctx context.Context, in *SignUpRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *authServiceClient) SignUp(ctx context.Context, in *SignUpRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error) {
+	out := new(AuthEmptyResponse)
 	err := c.cc.Invoke(ctx, "/protocol.AuthService/SignUp", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -66,8 +66,8 @@ var authServiceDeleteClaimsStreamDesc = &grpc.StreamDesc{
 	StreamName: "DeleteClaims",
 }
 
-func (c *authServiceClient) DeleteClaims(ctx context.Context, in *DeleteClaimsRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *authServiceClient) DeleteClaims(ctx context.Context, in *DeleteClaimsRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error) {
+	out := new(AuthEmptyResponse)
 	err := c.cc.Invoke(ctx, "/protocol.AuthService/DeleteClaims", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -79,8 +79,8 @@ var authServiceAddClaimsStreamDesc = &grpc.StreamDesc{
 	StreamName: "AddClaims",
 }
 
-func (c *authServiceClient) AddClaims(ctx context.Context, in *AddClaimsRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *authServiceClient) AddClaims(ctx context.Context, in *AddClaimsRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error) {
+	out := new(AuthEmptyResponse)
 	err := c.cc.Invoke(ctx, "/protocol.AuthService/AddClaims", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -105,8 +105,8 @@ var authServiceConfirmStreamDesc = &grpc.StreamDesc{
 	StreamName: "Confirm",
 }
 
-func (c *authServiceClient) Confirm(ctx context.Context, in *ConfirmRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *authServiceClient) Confirm(ctx context.Context, in *ConfirmRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error) {
+	out := new(AuthEmptyResponse)
 	err := c.cc.Invoke(ctx, "/protocol.AuthService/Confirm", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -118,8 +118,8 @@ var authServiceRestoreStreamDesc = &grpc.StreamDesc{
 	StreamName: "Restore",
 }
 
-func (c *authServiceClient) Restore(ctx context.Context, in *RestoreRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *authServiceClient) Restore(ctx context.Context, in *RestoreRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error) {
+	out := new(AuthEmptyResponse)
 	err := c.cc.Invoke(ctx, "/protocol.AuthService/Restore", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -131,8 +131,8 @@ var authServiceForgotPasswordStreamDesc = &grpc.StreamDesc{
 	StreamName: "ForgotPassword",
 }
 
-func (c *authServiceClient) ForgotPassword(ctx context.Context, in *ForgotPasswordRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *authServiceClient) ForgotPassword(ctx context.Context, in *ForgotPasswordRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error) {
+	out := new(AuthEmptyResponse)
 	err := c.cc.Invoke(ctx, "/protocol.AuthService/ForgotPassword", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -144,8 +144,8 @@ var authServiceChangePasswordStreamDesc = &grpc.StreamDesc{
 	StreamName: "ChangePassword",
 }
 
-func (c *authServiceClient) ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *authServiceClient) ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*AuthEmptyResponse, error) {
+	out := new(AuthEmptyResponse)
 	err := c.cc.Invoke(ctx, "/protocol.AuthService/ChangePassword", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -159,14 +159,14 @@ func (c *authServiceClient) ChangePassword(ctx context.Context, in *ChangePasswo
 // handler for that method returning an Unimplemented error.
 type AuthServiceService struct {
 	SignIn         func(context.Context, *SignInRequest) (*SignInResponse, error)
-	SignUp         func(context.Context, *SignUpRequest) (*EmptyResponse, error)
-	DeleteClaims   func(context.Context, *DeleteClaimsRequest) (*EmptyResponse, error)
-	AddClaims      func(context.Context, *AddClaimsRequest) (*EmptyResponse, error)
+	SignUp         func(context.Context, *SignUpRequest) (*AuthEmptyResponse, error)
+	DeleteClaims   func(context.Context, *DeleteClaimsRequest) (*AuthEmptyResponse, error)
+	AddClaims      func(context.Context, *AddClaimsRequest) (*AuthEmptyResponse, error)
 	RefreshToken   func(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
-	Confirm        func(context.Context, *ConfirmRequest) (*EmptyResponse, error)
-	Restore        func(context.Context, *RestoreRequest) (*EmptyResponse, error)
-	ForgotPassword func(context.Context, *ForgotPasswordRequest) (*EmptyResponse, error)
-	ChangePassword func(context.Context, *ChangePasswordRequest) (*EmptyResponse, error)
+	Confirm        func(context.Context, *ConfirmRequest) (*AuthEmptyResponse, error)
+	Restore        func(context.Context, *RestoreRequest) (*AuthEmptyResponse, error)
+	ForgotPassword func(context.Context, *ForgotPasswordRequest) (*AuthEmptyResponse, error)
+	ChangePassword func(context.Context, *ChangePasswordRequest) (*AuthEmptyResponse, error)
 }
 
 func (s *AuthServiceService) signIn(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -332,17 +332,17 @@ func RegisterAuthServiceService(s grpc.ServiceRegistrar, srv *AuthServiceService
 		}
 	}
 	if srvCopy.SignUp == nil {
-		srvCopy.SignUp = func(context.Context, *SignUpRequest) (*EmptyResponse, error) {
+		srvCopy.SignUp = func(context.Context, *SignUpRequest) (*AuthEmptyResponse, error) {
 			return nil, status.Errorf(codes.Unimplemented, "method SignUp not implemented")
 		}
 	}
 	if srvCopy.DeleteClaims == nil {
-		srvCopy.DeleteClaims = func(context.Context, *DeleteClaimsRequest) (*EmptyResponse, error) {
+		srvCopy.DeleteClaims = func(context.Context, *DeleteClaimsRequest) (*AuthEmptyResponse, error) {
 			return nil, status.Errorf(codes.Unimplemented, "method DeleteClaims not implemented")
 		}
 	}
 	if srvCopy.AddClaims == nil {
-		srvCopy.AddClaims = func(context.Context, *AddClaimsRequest) (*EmptyResponse, error) {
+		srvCopy.AddClaims = func(context.Context, *AddClaimsRequest) (*AuthEmptyResponse, error) {
 			return nil, status.Errorf(codes.Unimplemented, "method AddClaims not implemented")
 		}
 	}
@@ -352,22 +352,22 @@ func RegisterAuthServiceService(s grpc.ServiceRegistrar, srv *AuthServiceService
 		}
 	}
 	if srvCopy.Confirm == nil {
-		srvCopy.Confirm = func(context.Context, *ConfirmRequest) (*EmptyResponse, error) {
+		srvCopy.Confirm = func(context.Context, *ConfirmRequest) (*AuthEmptyResponse, error) {
 			return nil, status.Errorf(codes.Unimplemented, "method Confirm not implemented")
 		}
 	}
 	if srvCopy.Restore == nil {
-		srvCopy.Restore = func(context.Context, *RestoreRequest) (*EmptyResponse, error) {
+		srvCopy.Restore = func(context.Context, *RestoreRequest) (*AuthEmptyResponse, error) {
 			return nil, status.Errorf(codes.Unimplemented, "method Restore not implemented")
 		}
 	}
 	if srvCopy.ForgotPassword == nil {
-		srvCopy.ForgotPassword = func(context.Context, *ForgotPasswordRequest) (*EmptyResponse, error) {
+		srvCopy.ForgotPassword = func(context.Context, *ForgotPasswordRequest) (*AuthEmptyResponse, error) {
 			return nil, status.Errorf(codes.Unimplemented, "method ForgotPassword not implemented")
 		}
 	}
 	if srvCopy.ChangePassword == nil {
-		srvCopy.ChangePassword = func(context.Context, *ChangePasswordRequest) (*EmptyResponse, error) {
+		srvCopy.ChangePassword = func(context.Context, *ChangePasswordRequest) (*AuthEmptyResponse, error) {
 			return nil, status.Errorf(codes.Unimplemented, "method ChangePassword not implemented")
 		}
 	}
@@ -432,17 +432,17 @@ func NewAuthServiceService(s interface{}) *AuthServiceService {
 		ns.SignIn = h.SignIn
 	}
 	if h, ok := s.(interface {
-		SignUp(context.Context, *SignUpRequest) (*EmptyResponse, error)
+		SignUp(context.Context, *SignUpRequest) (*AuthEmptyResponse, error)
 	}); ok {
 		ns.SignUp = h.SignUp
 	}
 	if h, ok := s.(interface {
-		DeleteClaims(context.Context, *DeleteClaimsRequest) (*EmptyResponse, error)
+		DeleteClaims(context.Context, *DeleteClaimsRequest) (*AuthEmptyResponse, error)
 	}); ok {
 		ns.DeleteClaims = h.DeleteClaims
 	}
 	if h, ok := s.(interface {
-		AddClaims(context.Context, *AddClaimsRequest) (*EmptyResponse, error)
+		AddClaims(context.Context, *AddClaimsRequest) (*AuthEmptyResponse, error)
 	}); ok {
 		ns.AddClaims = h.AddClaims
 	}
@@ -452,22 +452,22 @@ func NewAuthServiceService(s interface{}) *AuthServiceService {
 		ns.RefreshToken = h.RefreshToken
 	}
 	if h, ok := s.(interface {
-		Confirm(context.Context, *ConfirmRequest) (*EmptyResponse, error)
+		Confirm(context.Context, *ConfirmRequest) (*AuthEmptyResponse, error)
 	}); ok {
 		ns.Confirm = h.Confirm
 	}
 	if h, ok := s.(interface {
-		Restore(context.Context, *RestoreRequest) (*EmptyResponse, error)
+		Restore(context.Context, *RestoreRequest) (*AuthEmptyResponse, error)
 	}); ok {
 		ns.Restore = h.Restore
 	}
 	if h, ok := s.(interface {
-		ForgotPassword(context.Context, *ForgotPasswordRequest) (*EmptyResponse, error)
+		ForgotPassword(context.Context, *ForgotPasswordRequest) (*AuthEmptyResponse, error)
 	}); ok {
 		ns.ForgotPassword = h.ForgotPassword
 	}
 	if h, ok := s.(interface {
-		ChangePassword(context.Context, *ChangePasswordRequest) (*EmptyResponse, error)
+		ChangePassword(context.Context, *ChangePasswordRequest) (*AuthEmptyResponse, error)
 	}); ok {
 		ns.ChangePassword = h.ChangePassword
 	}
@@ -480,12 +480,12 @@ func NewAuthServiceService(s interface{}) *AuthServiceService {
 // use of this type is not recommended.
 type UnstableAuthServiceService interface {
 	SignIn(context.Context, *SignInRequest) (*SignInResponse, error)
-	SignUp(context.Context, *SignUpRequest) (*EmptyResponse, error)
-	DeleteClaims(context.Context, *DeleteClaimsRequest) (*EmptyResponse, error)
-	AddClaims(context.Context, *AddClaimsRequest) (*EmptyResponse, error)
+	SignUp(context.Context, *SignUpRequest) (*AuthEmptyResponse, error)
+	DeleteClaims(context.Context, *DeleteClaimsRequest) (*AuthEmptyResponse, error)
+	AddClaims(context.Context, *AddClaimsRequest) (*AuthEmptyResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
-	Confirm(context.Context, *ConfirmRequest) (*EmptyResponse, error)
-	Restore(context.Context, *RestoreRequest) (*EmptyResponse, error)
-	ForgotPassword(context.Context, *ForgotPasswordRequest) (*EmptyResponse, error)
-	ChangePassword(context.Context, *ChangePasswordRequest) (*EmptyResponse, error)
+	Confirm(context.Context, *ConfirmRequest) (*AuthEmptyResponse, error)
+	Restore(context.Context, *RestoreRequest) (*AuthEmptyResponse, error)
+	ForgotPassword(context.Context, *ForgotPasswordRequest) (*AuthEmptyResponse, error)
+	ChangePassword(context.Context, *ChangePasswordRequest) (*AuthEmptyResponse, error)
 }

@@ -28,7 +28,7 @@ func TestConfirm(t *testing.T) {
 
 	res, err := client.Confirm(context.Background(), requestConfirm)
 	if res != nil && err == nil {
-		fmt.Println("create new user adn create token")
+		fmt.Println("create new users adn create token")
 	} else {
 		t.Errorf("Confirmation is failed, got:%s   ", err)
 	}

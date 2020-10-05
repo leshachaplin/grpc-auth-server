@@ -27,7 +27,7 @@ func TestSignIn(t *testing.T) {
 	log.Println( respSignIn.Token)
 	log.Println( respSignIn.RefreshToken)
 	if respSignIn != nil  && err == nil{
-		fmt.Printf("user autorizate token:%s\n", respSignIn.GetToken())
+		fmt.Printf("users autorizate token:%s\n", respSignIn.GetToken())
 	} else {
 		t.Errorf("sign in is failed, got:%s  , want:%s ", err, respSignIn.GetToken() )
 	}

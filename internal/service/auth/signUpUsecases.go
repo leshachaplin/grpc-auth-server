@@ -93,11 +93,11 @@ func checkIsCorrectData(ctx context.Context, users repository.UserRepository,
 	}
 
 	if users.IfExistUser(ctx, username) {
-		return errors.New("user with such username is exist, enter other username")
+		return errors.New("users with such username is exist, enter other username")
 	}
 
 	if users.IfExistUser(ctx, mail) {
-		return errors.New("user with such email is exist, enter other email")
+		return errors.New("users with such email is exist, enter other email")
 	}
 
 	err := verifyPassword(password)
@@ -142,7 +142,7 @@ func checkIsConfirmEmailSend(ctx context.Context, username string, cfg *config.C
 func createUser(ctx context.Context, user *repository.User, users repository.UserRepository) error {
 	err := users.Create(ctx, user)
 	if err != nil {
-		log.Errorf("error in create new user", err)
+		log.Errorf("error in create new users", err)
 		return err
 	}
 
@@ -150,7 +150,7 @@ func createUser(ctx context.Context, user *repository.User, users repository.Use
 
 	err = users.Update(ctx, user)
 	if err != nil {
-		log.Errorf("error in update user", err)
+		log.Errorf("error in update users", err)
 		return err
 	}
 

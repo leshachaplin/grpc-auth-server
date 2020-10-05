@@ -32,13 +32,13 @@ message FindRequest {
     google.protobuf.Any userField = 1;
 }
 
-message EmptyResponse {
+message EmptyUserResponse {
 }
 
 service UserService {
-    rpc CreateUser (CreateRequest) returns (EmptyResponse);
-    rpc Delete (DeleteRequest) returns (EmptyResponse);
-    rpc Update (UpdateRequest) returns (EmptyResponse);
+    rpc CreateUser (CreateRequest) returns (EmptyUserResponse);
+    rpc Delete (DeleteRequest) returns (EmptyUserResponse);
+    rpc Update (UpdateRequest) returns (EmptyUserResponse);
     rpc Find (FindRequest) returns (User);
 
 }

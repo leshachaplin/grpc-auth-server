@@ -25,7 +25,7 @@ func TestSignUp(t *testing.T) {
 
 	res, err := client.SignUp(context.Background(), requestSignUp)
 	if res != nil && err == nil {
-		fmt.Println("create new user adn create token")
+		fmt.Println("create new users adn create token")
 	} else {
 		t.Errorf("Sign up is failed, got:%s   ", err)
 	}

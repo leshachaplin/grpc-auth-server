@@ -1,4 +1,4 @@
-package user
+package users
 
 import (
 	"context"
@@ -13,7 +13,7 @@ type Server struct {
 	Rpc user.UserService
 }
 
-func (s *Server) CreateUser(ctx context.Context, req *protocol.CreateRequest) (*protocol.EmptyResponse, error) {
+func (s *Server) CreateUser(ctx context.Context, req *protocol.CreateRequest) (*protocol.EmptyUserResponse, error) {
 	u := repository.User{
 		Email:    req.User.Email,
 		Username: req.User.Username,
@@ -24,19 +24,19 @@ func (s *Server) CreateUser(ctx context.Context, req *protocol.CreateRequest) (*
 		log.Error("error in CreateUser")
 		return nil, err
 	}
-	return &protocol.EmptyResponse{}, nil
+	return &protocol.EmptyUserResponse{}, nil
 }
 
-func (s *Server) Delete(ctx context.Context, req *protocol.DeleteRequest) (*protocol.EmptyResponse, error) {
+func (s *Server) Delete(ctx context.Context, req *protocol.DeleteRequest) (*protocol.EmptyUserResponse, error) {
 	err := s.Rpc.Delete(ctx, req.Login)
 	if err != nil {
 		log.Error("error in Delete")
 		return nil, err
 	}
-	return &protocol.EmptyResponse{}, nil
+	return &protocol.EmptyUserResponse{}, nil
 }
 
-func (s *Server) Update(ctx context.Context, req *protocol.UpdateRequest) (*protocol.EmptyResponse, error) {
+func (s *Server) Update(ctx context.Context, req *protocol.UpdateRequest) (*protocol.EmptyUserResponse, error) {
 	u := repository.User{
 		Email:     req.User.Email,
 		Username:  req.User.Username,
@@ -48,34 +48,34 @@ func (s *Server) Update(ctx context.Context, req *protocol.UpdateRequest) (*prot
 		log.Error("error in Update")
 		return nil, err
 	}
-	return &protocol.EmptyResponse{}, nil
+	return &protocol.EmptyUserResponse{}, nil
 }
 
 func (s *Server) Find(ctx context.Context, req *protocol.FindRequest) (*protocol.User, error) {
-	user, err := s.Rpc.Find(ctx, req.UserField)
+	findUser, err := s.Rpc.Find(ctx, req.UserField)
 	if err != nil {
 		log.Error("error in Find")
 		return nil, err
 	}
 
-	createdAt, err := ptypes.TimestampProto(user.CreatedAt)
+	createdAt, err := ptypes.TimestampProto(findUser.CreatedAt)
 	if err != nil {
 		log.Error("error in converting types golang Time to protobuf Timestamp")
 		return nil, err
 	}
 
-	updatedAt, err := ptypes.TimestampProto(user.UpdatedAt)
+	updatedAt, err := ptypes.TimestampProto(findUser.UpdatedAt)
 	if err != nil {
 		log.Error("error in converting types golang Time to protobuf Timestamp")
 		return nil, err
 	}
 
 	return &protocol.User{
-		Id:        int32(user.ID),
-		Username:  user.Username,
-		Confirmed: user.Confirmed,
-		Email:     user.Email,
-		Password:  string(user.Password),
+		Id:        int32(findUser.ID),
+		Username:  findUser.Username,
+		Confirmed: findUser.Confirmed,
+		Email:     findUser.Email,
+		Password:  string(findUser.Password),
 		CreatedAt: createdAt,
 		UpdatedAt: updatedAt,
 	}, nil

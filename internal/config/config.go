@@ -15,13 +15,14 @@ import (
 type Config struct {
 	Port                     int    `env:"Port" envDefault:"1323"`
 	GrpcPort                 string `env:"GrpcPort" envDefault:"0.0.0.0:50051"`
+	UserGrpcPort             string `env:"UserGrpcPort" envDefault:"0.0.0.0:50053"`
 	EmailGrpcPort            string `env:"EmailGrpcPort" envDefault:"0.0.0.0:50052"`
 	SecretKeyAuth            string
 	AuthSecret               string `env:"AuthSecret"`
 	SecretKeyRefresh         string
 	RefreshSecret            string `env:"RefreshSecret"`
-	postgresConnectionSecret string `env:"PostgresConStr"`
-	smtpConnectionSecret     string `env:"SMTPConStr"`
+	PostgresConnectionSecret string `env:"PostgresConnectionSecret"`
+	SMTPConnectionSecret     string `env:"SMTPConStr"`
 	PostgresConnection       *sqlx.DB
 	SMTPClient               emailProto.EmailServiceClient
 }
@@ -39,9 +40,9 @@ func NewConfig() (*Config, error) {
 		return nil, err
 	}
 
-	postgresConn, err := awsConf.GetSQL(cfg.postgresConnectionSecret)
+	postgresConn, err := awsConf.GetSQL(cfg.PostgresConnectionSecret)
 	if err != nil {
-		log.Errorf("Can't get mongo connection string", err)
+		log.Errorf("Can't get SQL connection string", err)
 		return nil, err
 	}
 
@@ -71,11 +72,10 @@ func NewConfig() (*Config, error) {
 	defer clientConnInterface.Close()
 	client := emailProto.NewEmailServiceClient(clientConnInterface)
 
-
 	cfg.PostgresConnection = db
 	cfg.SMTPClient = client
 	cfg.SecretKeyAuth = secretKeyAuth.ApiKey
-	cfg.SecretKeyRefresh= secretKeyRefresh.ApiKey
+	cfg.SecretKeyRefresh = secretKeyRefresh.ApiKey
 
 	return &cfg, nil
 }

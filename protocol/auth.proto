@@ -45,7 +45,7 @@ message RestoreRequest {
     string newPassword = 3;
 }
 
-message EmptyResponse {
+message AuthEmptyResponse {
 }
 
 message DeleteClaimsRequest {
@@ -65,13 +65,13 @@ message ForgotPasswordRequest {
 
 service AuthService {
     rpc SignIn (SignInRequest) returns (SignInResponse);
-    rpc SignUp (SignUpRequest) returns (EmptyResponse);
-    rpc DeleteClaims (DeleteClaimsRequest) returns (EmptyResponse);
-    rpc AddClaims (AddClaimsRequest) returns (EmptyResponse);
+    rpc SignUp (SignUpRequest) returns (AuthEmptyResponse);
+    rpc DeleteClaims (DeleteClaimsRequest) returns (AuthEmptyResponse);
+    rpc AddClaims (AddClaimsRequest) returns (AuthEmptyResponse);
     rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
-    rpc Confirm (ConfirmRequest) returns (EmptyResponse);
-    rpc Restore (RestoreRequest) returns (EmptyResponse);
-    rpc ForgotPassword (ForgotPasswordRequest) returns (EmptyResponse);
-    rpc ChangePassword (ChangePasswordRequest) returns (EmptyResponse);
+    rpc Confirm (ConfirmRequest) returns (AuthEmptyResponse);
+    rpc Restore (RestoreRequest) returns (AuthEmptyResponse);
+    rpc ForgotPassword (ForgotPasswordRequest) returns (AuthEmptyResponse);
+    rpc ChangePassword (ChangePasswordRequest) returns (AuthEmptyResponse);
 }
 

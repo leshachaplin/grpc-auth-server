@@ -44,7 +44,7 @@ func New(usersRepository repository.UsersRepository, claims repository.ClaimsRep
 func (s *AuthenticationService) SignIn(ctx context.Context, login string, password string) (string, string, error) {
 	user, err := s.users.FindUser(ctx, login)
 	if err != nil {
-		log.Errorf("error in find user", err)
+		log.Errorf("error in find users", err)
 		return "", "", err
 	}
 
@@ -178,7 +178,7 @@ func (s *AuthenticationService) RefreshToken(ctx context.Context, tokenReqAuth,
 func (s *AuthenticationService) ChangePassword(ctx context.Context, mail, oldPassword, newPassword string) error {
 	user, err := s.users.FindUser(ctx, mail)
 	if err != nil {
-		log.Errorf("error in find user by email", err)
+		log.Errorf("error in find users by email", err)
 		return err
 	}
 
@@ -200,8 +200,4 @@ func (s *AuthenticationService) DeleteClaims(ctx context.Context, claims map[str
 
 func (s *AuthenticationService) AddClaims(claims map[string]string, ctx context.Context, login string) error {
 	return s.claims.AddClaims(ctx, claims, login)
-}
-
-func (s *AuthenticationService) Delete(ctx context.Context, login string) error {
-	return s.users.Delete(ctx, login)
 }

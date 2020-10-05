@@ -63,18 +63,18 @@ func (r *UsersRepository) Delete(ctx context.Context, login string) error {
 
 func (r *UsersRepository) Create(ctx context.Context, user *User) error {
 	_, err := r.db.QueryContext(ctx, `INSERT into "user" 
-    (username, email, confirmed, Password, createdat, updatedat)
-     values ($1, $2, $3, $4, $5, $6)`, user.Username, user.Email,
-		false, user.Password, time.Now().UTC(), time.Now().UTC())
+    (username, email, confirmed, Password)
+     values ($1, $2, $3, $4)`, user.Username, user.Email,
+		false, user.Password)
 	return err
 }
 
 func (r *UsersRepository) Update(ctx context.Context, user *User) error {
 	_, err := r.db.QueryContext(ctx, `UPDATE "user" set 
-                  (username, confirmed, id, password, email, createdat, updatedat) =
-                   ($1, $2, $3, $4, $5, $6, $7) where username = $8`,
+                  (username, confirmed, id, password, email) =
+                   ($1, $2, $3, $4, $5) where username = $6`,
                    user.Username, user.Confirmed, user.ID, user.Password, user.Email,
-                   user.CreatedAt, user.UpdatedAt, user.Username)
+                   user.Username)
 	return err
 }
 

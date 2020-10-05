@@ -30,7 +30,7 @@ func (r *ClaimsRepository) GetClaims(ctx context.Context, login string) (map[str
 	claim := Claim{}
 	for rows.Next() {
 		err := rows.StructScan(&claim)
-		//return &user, err
+		//return &users, err
 		_ =err
 
 		result[claim.Description] = claim.Value

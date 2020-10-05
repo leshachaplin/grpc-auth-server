@@ -17,9 +17,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
-	CreateUser(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	CreateUser(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*EmptyUserResponse, error)
+	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*EmptyUserResponse, error)
+	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*EmptyUserResponse, error)
 	Find(ctx context.Context, in *FindRequest, opts ...grpc.CallOption) (*User, error)
 }
 
@@ -35,8 +35,8 @@ var userServiceCreateUserStreamDesc = &grpc.StreamDesc{
 	StreamName: "CreateUser",
 }
 
-func (c *userServiceClient) CreateUser(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *userServiceClient) CreateUser(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*EmptyUserResponse, error) {
+	out := new(EmptyUserResponse)
 	err := c.cc.Invoke(ctx, "/protocol.UserService/CreateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -48,8 +48,8 @@ var userServiceDeleteStreamDesc = &grpc.StreamDesc{
 	StreamName: "Delete",
 }
 
-func (c *userServiceClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *userServiceClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*EmptyUserResponse, error) {
+	out := new(EmptyUserResponse)
 	err := c.cc.Invoke(ctx, "/protocol.UserService/Delete", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -61,8 +61,8 @@ var userServiceUpdateStreamDesc = &grpc.StreamDesc{
 	StreamName: "Update",
 }
 
-func (c *userServiceClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *userServiceClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*EmptyUserResponse, error) {
+	out := new(EmptyUserResponse)
 	err := c.cc.Invoke(ctx, "/protocol.UserService/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -88,9 +88,9 @@ func (c *userServiceClient) Find(ctx context.Context, in *FindRequest, opts ...g
 // RegisterUserServiceService is called.  Any unassigned fields will result in the
 // handler for that method returning an Unimplemented error.
 type UserServiceService struct {
-	CreateUser func(context.Context, *CreateRequest) (*EmptyResponse, error)
-	Delete     func(context.Context, *DeleteRequest) (*EmptyResponse, error)
-	Update     func(context.Context, *UpdateRequest) (*EmptyResponse, error)
+	CreateUser func(context.Context, *CreateRequest) (*EmptyUserResponse, error)
+	Delete     func(context.Context, *DeleteRequest) (*EmptyUserResponse, error)
+	Update     func(context.Context, *UpdateRequest) (*EmptyUserResponse, error)
 	Find       func(context.Context, *FindRequest) (*User, error)
 }
 
@@ -167,17 +167,17 @@ func (s *UserServiceService) find(_ interface{}, ctx context.Context, dec func(i
 func RegisterUserServiceService(s grpc.ServiceRegistrar, srv *UserServiceService) {
 	srvCopy := *srv
 	if srvCopy.CreateUser == nil {
-		srvCopy.CreateUser = func(context.Context, *CreateRequest) (*EmptyResponse, error) {
+		srvCopy.CreateUser = func(context.Context, *CreateRequest) (*EmptyUserResponse, error) {
 			return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 		}
 	}
 	if srvCopy.Delete == nil {
-		srvCopy.Delete = func(context.Context, *DeleteRequest) (*EmptyResponse, error) {
+		srvCopy.Delete = func(context.Context, *DeleteRequest) (*EmptyUserResponse, error) {
 			return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 		}
 	}
 	if srvCopy.Update == nil {
-		srvCopy.Update = func(context.Context, *UpdateRequest) (*EmptyResponse, error) {
+		srvCopy.Update = func(context.Context, *UpdateRequest) (*EmptyUserResponse, error) {
 			return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 		}
 	}
@@ -222,17 +222,17 @@ func RegisterUserServiceService(s grpc.ServiceRegistrar, srv *UserServiceService
 func NewUserServiceService(s interface{}) *UserServiceService {
 	ns := &UserServiceService{}
 	if h, ok := s.(interface {
-		CreateUser(context.Context, *CreateRequest) (*EmptyResponse, error)
+		CreateUser(context.Context, *CreateRequest) (*EmptyUserResponse, error)
 	}); ok {
 		ns.CreateUser = h.CreateUser
 	}
 	if h, ok := s.(interface {
-		Delete(context.Context, *DeleteRequest) (*EmptyResponse, error)
+		Delete(context.Context, *DeleteRequest) (*EmptyUserResponse, error)
 	}); ok {
 		ns.Delete = h.Delete
 	}
 	if h, ok := s.(interface {
-		Update(context.Context, *UpdateRequest) (*EmptyResponse, error)
+		Update(context.Context, *UpdateRequest) (*EmptyUserResponse, error)
 	}); ok {
 		ns.Update = h.Update
 	}
@@ -249,8 +249,8 @@ func NewUserServiceService(s interface{}) *UserServiceService {
 // definition, which is not a backward-compatible change.  For this reason,
 // use of this type is not recommended.
 type UnstableUserServiceService interface {
-	CreateUser(context.Context, *CreateRequest) (*EmptyResponse, error)
-	Delete(context.Context, *DeleteRequest) (*EmptyResponse, error)
-	Update(context.Context, *UpdateRequest) (*EmptyResponse, error)
+	CreateUser(context.Context, *CreateRequest) (*EmptyUserResponse, error)
+	Delete(context.Context, *DeleteRequest) (*EmptyUserResponse, error)
+	Update(context.Context, *UpdateRequest) (*EmptyUserResponse, error)
 	Find(context.Context, *FindRequest) (*User, error)
 }

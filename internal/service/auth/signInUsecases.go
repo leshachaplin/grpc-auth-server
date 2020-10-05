@@ -42,7 +42,7 @@ func createTokens(ctx context.Context, user *repository.User, cfg *conf.Config,
 			}
 		}
 	} else {
-		log.Errorf("user not found", err)
+		log.Errorf("users not found", err)
 		return "", "", err
 	}
 	return token, refreshToken, nil

@@ -1,11 +1,12 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE public.confirmation
 (
-    Id               serial PRIMARY KEY,
-    Username         CHARACTER VARYING(30),
+    Id_Confirmation  uuid PRIMARY KEY,
     UuidConfirmation CHARACTER VARYING(60),
     Expiration       timestamp
 );
 
 ALTER TABLE public.confirmation
-    ADD CONSTRAINT user_confirmed FOREIGN KEY (Username) REFERENCES public.user (username) ON DELETE CASCADE;
+    ADD CONSTRAINT confirmed_user FOREIGN KEY (Id_Confirmation) REFERENCES public.user (userid) ON DELETE CASCADE;
 

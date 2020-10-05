@@ -41,3 +41,5 @@ type Confirm interface {
 	Create(ctx context.Context, user string, uuid string, exp time.Time) error
 	Get(ctx context.Context, login string) (*Confirmation, error)
 }
+//TODO: check expiration
+//TODO: check amount of refresh sessions

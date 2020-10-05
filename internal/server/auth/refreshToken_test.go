@@ -25,7 +25,7 @@ func TestRefreshToken(t *testing.T) {
 
 	respRefresh, err := client.RefreshToken(context.Background(), requestRefresh)
 	if respRefresh != nil  && err == nil{
-		fmt.Printf("user refresh auth token:%s\n , user refresh token:%s\n ", respRefresh.GetToken(), respRefresh.GetRefreshToken())
+		fmt.Printf("users refresh auth token:%s\n , users refresh token:%s\n ", respRefresh.GetToken(), respRefresh.GetRefreshToken())
 	} else {
 		t.Errorf("refresh is failed, got:%s  , want:%s\n %s ", err, respRefresh.GetToken() , respRefresh.GetRefreshToken() )
 	}

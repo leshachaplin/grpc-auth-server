@@ -14,11 +14,11 @@ func selectFindField(ctx context.Context, db *sqlx.DB, userField interface{}) (r
 			if strings.ContainsAny(stringField, "@") {
 				rows, err = db.QueryxContext(ctx, `SELECT
 				username, email, password, confirmed, createdat, updatedat, id
-				FROM "user" WHERE email = $1`, stringField)
+				FROM "users" WHERE email = $1`, stringField)
 			} else {
 				rows, err = db.QueryxContext(ctx, `SELECT
 				username, email, password, confirmed, createdat, updatedat, id
-				FROM "user" WHERE username = $1`, stringField)
+				FROM "users" WHERE username = $1`, stringField)
 			}
 
 		}

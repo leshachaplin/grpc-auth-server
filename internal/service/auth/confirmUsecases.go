@@ -23,7 +23,7 @@ func confirmUserEmail(ctx context.Context, users repository.UserRepository,
 
 	err = users.Update(ctx, user)
 	if err != nil {
-		log.Errorf("error in update user", err)
+		log.Errorf("error in update users", err)
 		return err
 	}
 	return nil

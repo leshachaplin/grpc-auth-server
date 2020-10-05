@@ -24,8 +24,8 @@ func TestDelete(t *testing.T) {
 
 	responseDelete, err := client.Delete(context.Background(), requestDelete)
 	if err == nil {
-		fmt.Printf("delete user:%s  %s\n", requestDelete.Login, responseDelete)
+		fmt.Printf("delete users:%s  %s\n", requestDelete.Login, responseDelete)
 	} else {
-		t.Errorf("deleting user is failed, got:%s  , want:%s ", err, responseDelete )
+		t.Errorf("deleting users is failed, got:%s  , want:%s ", err, responseDelete )
 	}
 }
