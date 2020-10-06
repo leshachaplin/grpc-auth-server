@@ -20,10 +20,21 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION uuid_create_tg() RETURNS trigger AS
+$$
+BEGIN
+    IF tg_op = 'INSERT' THEN
+        NEW.UserId = uuid_generate_v4();
+        RETURN NEW;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE TABLE public.user
 (
-    UserId          uuid PRIMARY KEY,
+    UserId          uuid,
     Username        CHARACTER VARYING(64),
+    CONSTRAINT userPK PRIMARY KEY (UserId, Username),
     Confirmed       boolean     NOT NULL,
     Email           CHARACTER VARYING(64),
     Password        text        NOT NULL,
@@ -34,6 +45,9 @@ CREATE TABLE public.user
     Id_Restore      uuid,
     Id_Claim        uuid
 );
+
+CREATE INDEX idx_user_id ON public.user USING btree (UserId);
+CREATE INDEX idx_username ON public.user USING btree (Username);
 
 CREATE TRIGGER some_table_hash_insert
     BEFORE INSERT
@@ -48,6 +62,12 @@ CREATE TRIGGER some_table_hash_update
     WHEN ( NEW.password IS DISTINCT FROM OLD.password )
 EXECUTE PROCEDURE hash_update_tg();
 
+CREATE TRIGGER some_table_uuid_create
+    BEFORE INSERT
+    ON public.user
+    FOR EACH ROW
+EXECUTE PROCEDURE uuid_create_tg();
+
 CREATE TRIGGER set_timestamp
     BEFORE UPDATE
     ON public.user
@@ -59,15 +79,3 @@ CREATE TRIGGER check_is_valid_hash
     ON public.user
     FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
-
-ALTER TABLE public.user
-    ADD CONSTRAINT user_refresh FOREIGN KEY (UserId) REFERENCES public.refresh ("id_refresh");
-
-ALTER TABLE public.user
-    ADD CONSTRAINT user_confirmation FOREIGN KEY (UserId) REFERENCES public.confirmation ();
-
-ALTER TABLE public.user
-    ADD CONSTRAINT user_refresh FOREIGN KEY (UserId) REFERENCES public.refresh ("id_refresh");
-
-ALTER TABLE public.user
-    ADD CONSTRAINT user_refresh FOREIGN KEY (UserId) REFERENCES public.refresh ("id_refresh");

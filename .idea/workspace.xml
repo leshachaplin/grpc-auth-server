@@ -20,47 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d8ca363-7409-475c-b161-a48aa0a98273" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/internal/server/users/addUser_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/server/users/findUser_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/server/users/updateUser_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/V1__tableUser.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/5e428ec9-0cf2-4beb-8be2-27b044a22e5f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5e428ec9-0cf2-4beb-8be2-27b044a22e5f.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/5e428ec9-0cf2-4beb-8be2-27b044a22e5f/storage_v2/_src_/database/auth.qN0tAA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5e428ec9-0cf2-4beb-8be2-27b044a22e5f/storage_v2/_src_/database/auth.qN0tAA/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5e428ec9-0cf2-4beb-8be2-27b044a22e5f/storage_v2/_src_/database/auth.qN0tAA/schema/public.abK9xQ.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5e428ec9-0cf2-4beb-8be2-27b044a22e5f/storage_v2/_src_/database/auth.qN0tAA/schema/public.abK9xQ.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repository/claimsRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/claimsRepository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repository/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repository/userRepositiry.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/userRepositiry.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repository/userRepositoryUsecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/userRepositoryUsecases.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/server/auth/addClaims_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/auth/addClaims_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/server/auth/confirm_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/auth/confirm_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/server/auth/deleteUser_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/auth/deleteUser_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/server/auth/refreshToken_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/auth/refreshToken_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/server/auth/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/auth/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/server/auth/signIn_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/auth/signIn_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/server/auth/signUp_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/auth/signUp_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/server/user/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/users/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/service/auth/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/auth/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/service/auth/confirmUsecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/auth/confirmUsecases.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/service/auth/refreshTokenUsecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/auth/refreshTokenUsecases.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/service/auth/signInUsecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/auth/signInUsecases.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/service/auth/signUpUsecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/auth/signUpUsecases.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/V1__initial.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/V1__tableUser.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/V1__tableUser.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/migrations/V2__tableRefresh.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/V2__tableRefresh.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/migrations/V3__confirmation.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/V3__confirmation.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/migrations/V4__restorePassword.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/V4__restorePassword.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/migrations/V5__tableClaim.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/V5__tableClaim.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/V6__tableEmail.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/V6__tableEmail.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/protocol/auth.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/protocol/auth.proto" beforeDir="false" afterPath="$PROJECT_DIR$/protocol/auth.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/protocol/auth_grpc.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/protocol/user.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/protocol/user.proto" beforeDir="false" afterPath="$PROJECT_DIR$/protocol/user.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/protocol/user_grpc.pb.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +89,7 @@
       <recent name="$PROJECT_DIR$/internal/repository" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/leshachaplin/grpc-auth-server">
+  <component name="RunManager" selected="Go Test.TestAddUser in github.com/leshachaplin/grpc-auth-server/internal/server/users">
     <configuration name="go build github.com/leshachaplin/grpc-auth-server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="grpc-auth-server" />
       <working_directory value="$PROJECT_DIR$" />
@@ -195,8 +163,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build github.com/leshachaplin/grpc-auth-server" />
         <item itemvalue="Go Test.TestAddUser in github.com/leshachaplin/grpc-auth-server/internal/server/users" />
+        <item itemvalue="Go Build.go build github.com/leshachaplin/grpc-auth-server" />
         <item itemvalue="Go Test.TestUpdateUser in github.com/leshachaplin/grpc-auth-server/internal/server/users" />
         <item itemvalue="Go Test.TestAddClaims in github.com/leshachaplin/grpc-auth-server/internal/server/users" />
         <item itemvalue="Go Test.TestUserServer in github.com/leshachaplin/grpc-auth-server/internal/server/users" />
@@ -248,22 +216,22 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="754" y="340" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1601885485297" />
-    <state width="1874" height="314" key="GridCell.Tab.0.bottom" timestamp="1601928983565">
+    <state width="1874" height="314" key="GridCell.Tab.0.bottom" timestamp="1601965411579">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="314" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601928983565" />
-    <state width="1874" height="314" key="GridCell.Tab.0.center" timestamp="1601928983564">
+    <state width="1874" height="314" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601965411579" />
+    <state width="1874" height="314" key="GridCell.Tab.0.center" timestamp="1601965411576">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="314" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601928983564" />
-    <state width="1874" height="314" key="GridCell.Tab.0.left" timestamp="1601928983564">
+    <state width="1874" height="314" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601965411576" />
+    <state width="1874" height="314" key="GridCell.Tab.0.left" timestamp="1601965411574">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="314" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601928983564" />
-    <state width="1874" height="314" key="GridCell.Tab.0.right" timestamp="1601928983565">
+    <state width="1874" height="314" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601965411574" />
+    <state width="1874" height="314" key="GridCell.Tab.0.right" timestamp="1601965411577">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="314" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601928983565" />
+    <state width="1874" height="314" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601965411577" />
     <state width="1874" height="220" key="GridCell.Tab.1.bottom" timestamp="1601912702344">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
